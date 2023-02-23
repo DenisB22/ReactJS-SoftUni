@@ -1,0 +1,27 @@
+.card {
+    width: 400px;
+    height: 600px;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: lightcyan;
+    
+}
+
+.image {
+    width: 400px;
+    height: 350px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.title {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+}
+
+.bolded {
+    font-weight: bold;
+}
