@@ -1,0 +1,9 @@
+.firstRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.element {
+    flex-basis: 20%;
+    border-radius: 5px;
+}

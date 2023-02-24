@@ -1,0 +1,7 @@
+.elements {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 170px;
+    height: 160px;
+}
