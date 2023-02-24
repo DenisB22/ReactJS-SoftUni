@@ -4,4 +4,11 @@
     background-color: #bcd1c0;
     border-radius: 5px;
     margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.numContainer {
+    margin-right: 10px;
 }

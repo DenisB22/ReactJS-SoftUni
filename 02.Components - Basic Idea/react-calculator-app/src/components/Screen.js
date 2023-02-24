@@ -2,7 +2,11 @@ import styles from './Screen.module.css'
 
 const Screen = () => {
     return (
-        <div className={styles.screen}></div>
+        <div id="screen" className={styles.screen}>
+            
+                <p>0</p>
+            
+        </div>
     );
 };
 
