@@ -23,6 +23,44 @@ function App() {
       });
   }, []);
 
+  const onUserCreateSubmit = async (e) => {
+    // Stop automatic form submit
+    e.preventDefault();
+
+    // Take form data from DOM Tree
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    // Send AJAX Request to server
+    const createdUser = await userService.create(data);
+    
+    // If successfull add new user to the state
+    setUsers(state => [...state, createdUser]);
+
+    // Close dialog
+
+  };
+
+  const onUserUpdateSubmit = async (e, userId) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+
+    const updatedUser = await userService.update(userId, data);
+
+    setUsers(state => state.map(x => x._id == userId ? updatedUser : x));
+  };
+
+  const onUserDelete = async (userId) => {
+    // Delete from server
+    await userService.remove(userId);
+
+    // Delete from state
+    setUsers(state => state.filter(x => x._id !== userId));
+    
+  };
+
   return (
     <Fragment>
       <Header />
@@ -30,9 +68,15 @@ function App() {
         <section className="card users-container">
           <Search />
 
-          <UserList users={users} />
+          <UserList 
+            users={users} 
+            onUserCreateSubmit={onUserCreateSubmit}
+            // onDeleteClick={onUserDelete}
+            onUserUpdateSubmit={onUserUpdateSubmit} 
+            onUserDelete={onUserDelete} 
+          />
 
-          <button className="btn-add btn">Add new user</button>
+          
         </section>
       </main>
       <Footer />

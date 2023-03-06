@@ -3,10 +3,21 @@ import { useState } from "react";
 import * as userService from "../services/userService";
 
 import { User } from "./User";
+import { UserCreate } from "./UserCreate";
+import { UserDelete } from "./UserDelete";
 import { UserDetails } from "./UserDetails";
 
-export const UserList = ({ users }) => {
+export const UserList = ({ 
+    users,
+    onUserCreateSubmit,
+    onUserDelete,
+    onUserUpdateSubmit,
+
+}) => {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showDeleteUser, setShowDeleteUser] = useState(false);
+  const [showEditUser, setShowEditUser] = useState(null);
+  const [showAddUser, setShowAddUser] = useState(false);
 
   const onInfoClick = async (userId) => {
     const user = await userService.getOne(userId);
@@ -16,11 +27,49 @@ export const UserList = ({ users }) => {
 
   const onClose = () => {
     setSelectedUser(null);
+    setShowAddUser(false);
+    setShowDeleteUser(null);
+    setShowEditUser(null);
+  };
+
+  const onUserAddClick = () => {
+    setShowAddUser(true);
+  };
+
+  const onUserCreateSubmitHandler = (e) => {
+    onUserCreateSubmit(e);
+    setShowAddUser(false);
+  };
+
+  const onUserUpdateSubmitHandler = (e, userId) => {
+    onUserUpdateSubmit(e, userId);
+    setShowEditUser(null);
+    // onClose();
+  };
+
+  const onDeleteClick = (userId) => {
+    setShowDeleteUser(userId);
+
+  };
+
+  const onDeleteHandler = () => {
+    onUserDelete(showDeleteUser);
+    onClose();
+  };
+
+  const onEditClick = async (userId) => {
+    const user = await userService.getOne(userId);
+
+    setShowEditUser(user);
+
   };
 
   return (
     <>
       {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
+      {showAddUser && <UserCreate onClose={onClose} onUserCreateSubmit={onUserCreateSubmitHandler} />}
+      {showDeleteUser && <UserDelete onClose={onClose} onDelete={onDeleteHandler} />}
+      {showEditUser && <UserCreate user={showEditUser} onClose={onClose} onUserCreateSubmit={onUserUpdateSubmitHandler} />}
       <div className="table-wrapper">
         {/* <div className="loading-shade">
         <div className="spinner"></div>
@@ -182,11 +231,18 @@ export const UserList = ({ users }) => {
           </thead>
           <tbody>
             {users.map(u => 
-              <User key={u._id} {...u} onInfoClick={onInfoClick} />
+              <User 
+                {...u} 
+                key={u._id} 
+                onInfoClick={onInfoClick}
+                onDeleteClick={onDeleteClick}
+                onEditClick={onEditClick} 
+              />
             )}
           </tbody>
         </table>
       </div>
+      <button className="btn-add btn" onClick={onUserAddClick}>Add new user</button>
     </>
   );
 };
