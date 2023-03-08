@@ -2,24 +2,50 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-
+  const [username, setUsername] = useState("Pesho");
+  const [age, setAge] = useState();
+  const [creditCard, setCreditCard] = useState('');
+  const [occupation, setOccupation] = useState('engineering');
+  const [gender, setGender] = useState('male');
+  const [bio, setBio] = useState('');
   const [hobbies, setHobbies] = useState({});
 
-  const [values, setValues] = useState({
-    username: 'Pesho',
-    creditCard: '',
-    occupation: 'engineering',
-    gender: 'male',
-    bio: '',
-    age: '',
-  });
-
-  const onChangeHandler = (e) => {
-    setValues(state => ({...state, [e.target.name]: e.target.value}));
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      setUsername("Gosho");
+    }, 3000);
+  }, []);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
+
+    console.log(username);
+    console.log(age);
+    console.log(creditCard);
+  };
+
+  const onUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const onAgeChange = (e) => {
+    setAge(Number(e.target.value));
+  };
+
+  const onCreditCardChange = (e) => {
+    setCreditCard(e.target.value);
+  };
+
+  const onOccupationChange = (e) => {
+    setOccupation(e.target.value);
+  };
+
+  const onGenderChange = (e) => {
+    setGender(e.target.value);
+  };
+
+  const onBioChange = (e) => {
+    setBio(e.target.value);
   };
 
   const onHobbiesChange = (e) => {
@@ -36,8 +62,8 @@ function App() {
               type="text"
               name="username"
               id="username"
-              value={values.username}
-              onChange={onChangeHandler}
+              value={username}
+              onChange={onUsernameChange}
             />
           </div>
 
@@ -47,27 +73,27 @@ function App() {
               type="number"
               name="age"
               id="age"
-              value={values.age}
-              onChange={onChangeHandler}
+              value={age ?? ""}
+              onChange={onAgeChange}
             />
           </div>
 
-          {Number(values.age) >= 18 && (
+          {age >= 18 && (
             <div>
               <label htmlFor="credit-card">Credit Card</label>
               <input
                 type="text"
                 name="creditCard"
                 id="credit-card"
-                value={values.creditCard}
-                onChange={onChangeHandler}
+                value={creditCard}
+                onChange={onCreditCardChange}
               />
             </div>
           )}
 
           <div>
             <label htmlFor="occupation">Occupation</label>
-            <select name="occupation" id="occupation" value={values.occupation} onChange={onChangeHandler}>
+            <select name="occupation" id="occupation" value={occupation} onChange={onOccupationChange}>
               <option value="it">IT</option>
               <option value="engineering">Engineering</option>
               <option value="medicine">Medicine</option>
@@ -76,14 +102,14 @@ function App() {
 
           <div>
             <label htmlFor="male">Male</label>
-            <input type="radio" name="gender" id="male" value="male" onChange={onChangeHandler} checked={values.gender === 'male'} />
+            <input type="radio" name="gender" id="male" value="male" onChange={onGenderChange} checked={gender === 'male'} />
             <label htmlFor="female">Female</label>
-            <input type="radio" name="gender" id="female" value="female" onChange={onChangeHandler} checked={values.gender === 'female'} />
+            <input type="radio" name="gender" id="female" value="female" onChange={onGenderChange} checked={gender === 'female'} />
           </div>
 
           <div>
             <label htmlFor="bio">Bio</label>
-            <textarea name="bio" id="bio" cols="30" rows="10" value={values.bio} onChange={onChangeHandler}></textarea>
+            <textarea name="bio" id="bio" cols="30" rows="10" value={bio} onChange={onBioChange}></textarea>
           </div>
 
           <div>
