@@ -1,0 +1,41 @@
+.header-container ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 900px;
+}
+
+.home-functionality a {
+    border: 1px solid transparent;
+    padding: 0.45rem 0.85rem;
+    border-radius: 0.37rem;
+
+    background-color: #17242a;
+    color: #fff;
+    text-decoration: none;
+}
+
+.user-functionality a {
+    text-decoration: none;
+    color: #17242a;    
+}
+
+.user-functionality {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.img-logo {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+}
+
+.div-container {
+    justify-content: space-between;
+    display: flex;
+}
