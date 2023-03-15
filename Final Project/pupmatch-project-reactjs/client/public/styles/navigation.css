@@ -1,5 +1,5 @@
 body {
-    background-image: url('../images/bg-fixed-3.jpg');
+    background-image: url('../images/adorable-puppy.jpg');
     background-attachment: fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -25,14 +25,21 @@ footer {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+.pupmatchLogo {
+    border-radius: 100%;
+    width: 150px;
+    height: 150px;
+}
+
 header {
     position: relative;
     padding: 10px;
+    background-color: #8e7065;
 }
 
 header h1 {
     display: inline-block;
-    background-color: #29303c;
+    background-color: #8e7065;
     color: white;
     margin-bottom: auto;
 }
