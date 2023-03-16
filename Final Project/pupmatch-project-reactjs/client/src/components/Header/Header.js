@@ -1,27 +1,23 @@
-import { Link } from 'react-router-dom';
+import * as React from "react";
+import AppBar from "@mui/material/AppBar";
+import Button from "@mui/material/Button";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import logo from '../../images/pupmatch-logo-2.png'
+import useStyles from "../../styles";
+
 
 export const Header = () => {
-  return (
-    <header>
-      <img className="pupmatchLogo" src="./images/pupmatch-logo.png" alt="" />
-      <h1>
-        <Link className="home" to="/">
-          Pupmatch
-        </Link>
-      </h1>
-      <nav>
-        <Link to="/catalog">All Puppies</Link>
+    const classes = useStyles();
 
-        <div id="user">
-          <Link to="/create-page">Create Puppy Profile</Link>
-          <Link to="/logout">Logout</Link>
-        </div>
-
-        <div id="guest">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Register</Link>
-        </div>
-      </nav>
-    </header>
-  );
+    return (
+        <AppBar position="relative">
+        <Toolbar>
+        <img className={classes.image} src={logo} alt="Pupmatch Logo"/>
+          <Button href="/" variant="string">
+            <Typography href="/" variant="h6" color="inherit" noWrap>Pupmatch</Typography>
+          </Button>
+        </Toolbar>
+      </AppBar>
+    );
 };
