@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Footer } from "../Footer/Footer";
 
-
 const theme = createTheme();
 
 export const Register = () => {
@@ -128,6 +127,21 @@ export const Register = () => {
                 <TextField
                   required
                   fullWidth
+                  id="image"
+                  label="Puppy's Image"
+                  name="image"
+                  autoComplete="image"
+                />
+                <Button variant="contained" component="label">
+                  Upload Image
+                  <input type="file" hidden />
+                </Button>
+                
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
@@ -148,13 +162,13 @@ export const Register = () => {
               <Grid item xs={12}>
                 <TextField
                   id="outlined-multiline-static"
+                  required
                   fullWidth
                   label="Additional Info"
                   name="additional-info"
                   type="info"
                   multiline
                   rows={4}
-                  
                 />
               </Grid>
               <Grid item xs={12}>
