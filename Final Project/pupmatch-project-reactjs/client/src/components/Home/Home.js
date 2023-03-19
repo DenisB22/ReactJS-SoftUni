@@ -60,6 +60,7 @@ export const Home = ({
             >
               <Button href="/login" variant="contained">Login</Button>
               <Button href="/register" variant="outlined">Register</Button>
+              <Button href="/messages" variant="outlined">Messages</Button>
             </Stack>
           </Container>
         </Box>

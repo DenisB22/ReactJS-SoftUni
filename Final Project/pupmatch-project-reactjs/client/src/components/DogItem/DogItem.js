@@ -72,7 +72,7 @@ export const DogItem = ({ cards }) => {
                     component="h1"
                     variant="h3"
                     align="center"
-                    color="text.primary"
+                    color="text.secondary"
                     gutterBottom
                   >
                     No Puppies yet

@@ -21,8 +21,17 @@ export const Register = () => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      city: data.get('city'),
+      country: data.get('country'),
+      gender: data.get('gender'),
+      age: data.get('age'),
+      breed: data.get('breed'),
+      imageUrl: data.get('imageUrl'),
       email: data.get("email"),
       password: data.get("password"),
+      additionalInfo: data.get('additionalInfo')
     });
   };
 
