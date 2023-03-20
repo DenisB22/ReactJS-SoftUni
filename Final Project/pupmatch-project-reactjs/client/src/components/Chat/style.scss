@@ -62,6 +62,8 @@
                 .user {
                     display: flex;
                     gap: 10px;
+                    justify-content: center;
+                    align-items: center;
 
                     img {
                         background-color: #ddddf7;
@@ -71,11 +73,25 @@
                         object-fit: cover;
                     }
 
-                    button {
+                    span {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    .button {
+                        text-decoration: none;
                         background-color: #0F2740;
                         color: #ddddf7;
                         font-size: 10px;
-                        border: none;
+                        width: 35px;
+                        height: 35px;
+                        
+
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        
                         cursor: pointer;
                         @include tablet {
                             position: absolute;

@@ -586,6 +586,7 @@
 
             if (query.load) {
                 const props = query.load.split(',').filter(p => p != '');
+                
                 props.map(prop => {
                     const [propName, relationTokens] = prop.split('=');
                     const [idSource, collection] = relationTokens.split(':');

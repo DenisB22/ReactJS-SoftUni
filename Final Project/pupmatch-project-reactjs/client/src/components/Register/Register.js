@@ -11,28 +11,91 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+
+import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Footer } from "../Footer/Footer";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth, db, storage } from "../../firebase";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { doc, setDoc } from "firebase/firestore"; 
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
 export const Register = () => {
-  const handleSubmit = (event) => {
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      city: data.get('city'),
-      country: data.get('country'),
-      gender: data.get('gender'),
-      age: data.get('age'),
-      breed: data.get('breed'),
-      imageUrl: data.get('imageUrl'),
+      displayName: data.get("firstName"),
+      lastName: data.get("lastName"),
+      city: data.get("city"),
+      country: data.get("country"),
+      gender: data.get("gender"),
+      age: data.get("age"),
+      breed: data.get("breed"),
+      imageUrl: data.get("imageUrl"),
       email: data.get("email"),
       password: data.get("password"),
-      additionalInfo: data.get('additionalInfo')
+      additionalInfo: data.get("additionalInfo"),
     });
+
+    const firstName = data.get("firstName");
+    const lastName = data.get("lastName");
+    const city = data.get("city");
+    const country = data.get("country");
+    const gender = data.get("gender");
+    const age = data.get("age");
+    const breed = data.get("breed");
+    const file = data.get("imageUrl");
+    const email = data.get("email");
+    const password = data.get("password");
+    const additionalInfo = data.get("additionalInfo");
+
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+
+      const storageRef = ref(storage, firstName);
+
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      // Register three observers:
+      // 1. 'state_changed' observer, called any time the state changes
+      // 2. Error observer, called on failure
+      // 3. Completion observer, called on successful completion
+      uploadTask.on(
+        (error) => {
+          // Handle unsuccessful uploads
+          setErr(true);
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+            await updateProfile(res.user, {
+              displayName: firstName,
+              photoURL:downloadURL,
+            });
+            await setDoc(doc(db, "users", res.user.uid), {
+              uid: res.user.uid,
+              firstName,
+              email,
+              photoURL: downloadURL,
+            });
+
+            await setDoc(doc(db, "userChats", res.user.uid), {});
+            navigate("/");
+
+          });
+        }
+      );
+    } catch (err) {
+      setErr(true);
+    }
   };
 
   return (
@@ -145,7 +208,6 @@ export const Register = () => {
                   Upload Image
                   <input type="file" hidden />
                 </Button>
-                
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -199,12 +261,13 @@ export const Register = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Login
                 </Link>
               </Grid>
             </Grid>
           </Box>
+          {err && <span>Something went wrong</span>}
         </Box>
         <Footer />
       </Container>

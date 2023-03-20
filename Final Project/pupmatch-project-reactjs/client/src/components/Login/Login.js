@@ -13,17 +13,35 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Footer } from '../Footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase';
+
 
 const theme = createTheme();
 
 export const Login = () => {
-  const handleSubmit = (event) => {
+  const [err, setErr] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     console.log({
       email: data.get('email'),
       password: data.get('password'),
     });
+    const email = data.get("email");
+    const password = data.get("password");
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate('/');
+    } catch(err) {
+      setErr(true);
+    }
+
   };
 
   return (
@@ -101,7 +119,7 @@ export const Login = () => {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link href="/register" variant="body2">
                     {"Don't have an account? Register"}
                   </Link>
                 </Grid>
@@ -109,6 +127,7 @@ export const Login = () => {
               
               <Footer />
             </Box>
+            {err && <span>Something went wrong</span>}
           </Box>
         </Grid>
       </Grid>

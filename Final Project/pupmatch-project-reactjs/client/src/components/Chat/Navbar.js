@@ -1,11 +1,18 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
+
 export const Navbar = () => {
+    const {currentUser} = useContext(AuthContext);
+
     return (
         <div className="navbar">
             <span className="logo">Pupmatch</span>
             <div className="user">
-                <img src="https://images.pexels.com/photos/15764525/pexels-photo-15764525.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
-                <span>Ziggy</span>
-                <button>Home</button>
+                <img src={currentUser.photoURL} alt="" />
+                <span>{currentUser.displayName}</span>
+                {/* <button>Home</button> */}
+                <Link className="button" to="/"><span>Home</span></Link>
             </div>
         </div>
     );
