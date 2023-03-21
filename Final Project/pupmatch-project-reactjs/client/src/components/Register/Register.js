@@ -18,7 +18,7 @@ import { Footer } from "../Footer/Footer";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, setDoc } from "firebase/firestore"; 
+import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
@@ -43,6 +43,7 @@ export const Register = () => {
       password: data.get("password"),
       additionalInfo: data.get("additionalInfo"),
     });
+    // console.log(event.target);
 
     const firstName = data.get("firstName");
     const lastName = data.get("lastName");
@@ -51,10 +52,13 @@ export const Register = () => {
     const gender = data.get("gender");
     const age = data.get("age");
     const breed = data.get("breed");
-    const file = data.get("imageUrl");
+    const file = data.get("file");
     const email = data.get("email");
     const password = data.get("password");
     const additionalInfo = data.get("additionalInfo");
+
+    console.log(file.name);
+
 
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -78,7 +82,7 @@ export const Register = () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateProfile(res.user, {
               displayName: firstName,
-              photoURL:downloadURL,
+              photoURL: downloadURL,
             });
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
@@ -89,7 +93,6 @@ export const Register = () => {
 
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
-
           });
         }
       );
@@ -203,11 +206,37 @@ export const Register = () => {
                   label="Puppy's Image"
                   name="image"
                   autoComplete="image"
+                  InputProps={{
+                    readOnly: true,
+                  }}
                 />
                 <Button variant="contained" component="label">
                   Upload Image
-                  <input type="file" hidden />
+                  <input 
+                  type="file"
+                  id="file"
+                  name="file"
+                  required
+                  hidden
+                  />
                 </Button>
+                {/* <input
+                  accept="image/*"
+                  
+                  style={{ display: "none" }}
+                  id="raised-button-file"
+                  multiple
+                  type="file"
+                />
+                <label htmlFor="raised-button-file">
+                  <Button
+                    variant="raised"
+                    component="span"
+                    
+                  >
+                    Upload
+                  </Button>
+                </label> */}
               </Grid>
               <Grid item xs={12}>
                 <TextField
