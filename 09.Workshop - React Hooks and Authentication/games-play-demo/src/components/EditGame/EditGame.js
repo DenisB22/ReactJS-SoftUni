@@ -4,10 +4,9 @@ import { useForm } from "../hooks/useForm";
 import { useService } from '../hooks/useService';
 import { gameServiceFactory } from '../../services/gameService';
 
-export const EditGame = (
+export const EditGame = ({
     onGameEditSubmit,
-
-) => {
+}) => {
     const { gameId } = useParams();
     const gameService = useService(gameServiceFactory);
     const { values, changeHandler, onSubmit, changeValues }= useForm({
