@@ -5,9 +5,9 @@
 3. Route Guards
 4. Resource Guards / isOwner
 
-
  ## Features
  * delete games
+ ---
  * latest games
  * search?
 
