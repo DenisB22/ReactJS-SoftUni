@@ -9,6 +9,10 @@ import { TodoContext } from "../contexts/TodoContext";
 
 export default class Header extends Component {
   render() {
+    if (Math.random() < 0.5) {
+      throw { message: `Failed to render` };
+    }
+    
     return (
       <TodoContext.Consumer>
         {({ name }) => (
