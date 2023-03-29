@@ -2,6 +2,8 @@ import { Component } from 'react';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { TodoContext } from './contexts/TodoContext';
+
 import Header from "./components/Header";
 import TodoList from "./components/TodoList";
 
@@ -45,13 +47,13 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <TodoContext.Provider value={{todos: this.state.todos, name: this.state.name}}>
         <Header />
 
           <h2>{this.state.name}</h2>
 
         <TodoList todos={this.state.todos} onTodoClick={this.onTodoClick} onTodoDelete={this.onTodoDelete} />
-      </>
+      </TodoContext.Provider>
     );
   }
 }
