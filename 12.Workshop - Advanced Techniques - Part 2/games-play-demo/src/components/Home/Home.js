@@ -32,7 +32,7 @@ export const Home = () => {
 
       <div id="home-page">
         <h1>Latest Games - {result}</h1>
-        {latestGames.map(game => <LatestGame {...game} onLikeClick={onLikeClick} />)}
+        {latestGames.map(game => <LatestGame key={game._id} {...game} onLikeClick={onLikeClick} />)}
 
         {latestGames.length === 0 && (
           <p className="no-articles">No games yet</p>
