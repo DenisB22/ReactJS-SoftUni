@@ -5,7 +5,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
+// import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -20,6 +20,7 @@ import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import  { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -88,6 +89,10 @@ export const Register = () => {
               uid: res.user.uid,
               firstName,
               email,
+              gender,
+              breed,
+              city,
+              country,
               photoURL: downloadURL,
             });
 
@@ -290,9 +295,10 @@ export const Register = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                {/* <Link href="/login" variant="body2">
                   Already have an account? Login
-                </Link>
+                </Link> */}
+                <Link to="/login">Already have an account? Login</Link>
               </Grid>
             </Grid>
           </Box>

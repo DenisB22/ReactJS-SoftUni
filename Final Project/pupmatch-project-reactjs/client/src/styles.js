@@ -7,8 +7,20 @@ const useStyles = makeStyles((theme) => ({
         height: '150px',
         marginRight: '10px',
         marginTop: '10px',
-        marginBottom: '10px'
+        marginBottom: '10px',
     },
+    loginLink: {
+        textDecoration: 'none',
+        color: 'white',
+    },
+    registerLink: {
+        textDecoration: 'none',
+        color: '#1976d2',
+    },
+    homeLink: {
+        textDecoration: 'none',
+        color: 'white',
+    }
 }));
 
 export default useStyles;

@@ -6,8 +6,12 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import useStyles from "../../styles";
+
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { signOut } from "firebase/auth";
+
+import { Link } from 'react-router-dom';
 
 import { Header } from "../Header/Header";
 import { Footer } from "../Footer/Footer";
@@ -17,6 +21,7 @@ import { auth } from "../../firebase";
 const theme = createTheme();
 
 export const Home = ({ cards, currentUser }) => {
+  const classes = useStyles();
 
   return (
     <ThemeProvider theme={theme}>
@@ -48,8 +53,8 @@ export const Home = ({ cards, currentUser }) => {
               color="text.secondary"
               paragraph
             >
-              Welcome to Pupmatch - where dog lovers can find their perfect
-              match. Connect with adorable pups in your area and make new furry
+              Welcome to Pupmatch - where dog lovers can find the perfect
+              match for their puppies. Connect with adorable pups in your area and make new furry
               friends. Join our community and let's bark up some great matches
               together!
             </Typography>
@@ -65,8 +70,18 @@ export const Home = ({ cards, currentUser }) => {
                 <Button onClick={() => signOut(auth)} variant="contained">Logout</Button>
               </> :
               <>
-                <Button href="/login" variant="contained">Login</Button>
-                <Button href="/register" variant="outlined">Register</Button>
+                {/* <Button href="/login" variant="contained">Login</Button> */}
+                <Button variant="contained">
+                  <Link to="/login" className={classes.loginLink}>
+                    Login
+                  </Link>
+                </Button>
+                {/* <Button href="/register" variant="outlined">Register</Button> */}
+                <Button variant="outlined">
+                  <Link to="/register" className={classes.registerLink}>
+                    Register
+                  </Link>
+                </Button>
               </>
               }
 

@@ -37,12 +37,17 @@ export const DogItem = ({ cards }) => {
                   alt="random"
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h4" component="h2">
                     {card.firstName}
                   </Typography>
                   <Typography variant="h6">
-                    {/* {card.gender.toUpperCase()} */}
-                    MALE
+                    {card.gender.toUpperCase()}
+                  </Typography>
+                  <Typography>
+                    {card.breed}
+                  </Typography>
+                  <Typography >
+                    {card.city}, {card.country}
                   </Typography>
                   <Typography>{card.additionalInfo}</Typography>
                 </CardContent>
