@@ -20,6 +20,16 @@ const useStyles = makeStyles((theme) => ({
     homeLink: {
         textDecoration: 'none',
         color: 'white',
+    },
+    nameLogoContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: '20px'
+    },
+    cardContainer: {
+        marginTop: "calc(((100vh - 64px) - 514px) / 2)",
+        
     }
 }));
 

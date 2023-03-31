@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
-import * as dogService from './services/dogService';
 
 import { Home } from "./components/Home/Home";
 import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { ChatBox } from './components/Chat/ChatBox';
+import { Details } from './components/Details/Details';
 
+import * as dogService from './services/dogService';
 import { AuthContext } from './context/AuthContext';
 
 import { db } from './firebase';
@@ -81,6 +82,7 @@ function App() {
         </ProtectedRoute>
         } />
         {/* <Route path="/messages" element={<ChatBox />} /> */}
+        <Route path='/details' element={<Details />} />
       </Routes>
     </div>
   );

@@ -14,14 +14,13 @@ export const Header = () => {
   return (
     <AppBar position="relative">
       <Toolbar>
-        <img className={classes.imageLogo} src={logo} alt="Pupmatch Logo" />
-        <Button variant="string">
+        <Button href="" variant="string">
             <Typography variant="h6" color="inherit" noWrap>
                 <Link to="/" className={classes.homeLink}>
                   Pupmatch
                 </Link>
             </Typography>
-          </Button>
+        </Button>
       </Toolbar>
     </AppBar>
   );

@@ -18,6 +18,8 @@ import { Footer } from "../Footer/Footer";
 import { DogItem } from "../DogItem/DogItem";
 import { auth } from "../../firebase";
 
+import logo from "../../images/pupmatch-logo-2.png";
+
 const theme = createTheme();
 
 export const Home = ({ cards, currentUser }) => {
@@ -44,8 +46,10 @@ export const Home = ({ cards, currentUser }) => {
               align="center"
               color="text.primary"
               gutterBottom
+              className={classes.nameLogoContainer}
             >
-              Pupmatch
+              <span>Pupmatch</span>
+              <img className={classes.imageLogo} src={logo} alt="Pupmatch Logo" />
             </Typography>
             <Typography
               variant="h5"
