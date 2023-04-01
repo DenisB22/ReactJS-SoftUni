@@ -12,18 +12,19 @@ import * as dogService from './services/dogService';
 import { AuthContext } from './context/AuthContext';
 
 import { db } from './firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 
 import './components/Chat/style.scss';
+import { Button } from '@mui/material';
 
 
 function App() {
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
+
   const usersCollectionRef = collection(db, "users");
 
   const {currentUser} = useContext(AuthContext);
   console.log(currentUser);
-
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser) {
@@ -32,31 +33,6 @@ function App() {
 
     return children;
   };
-
-  // useEffect(() => {
-  //   dogService.getAll()
-  //     .then(result => {
-  //       setCards(result)
-  //     })
-  // }, []);
-
-  // return (
-  //   <div>
-  //     <Routes>
-  //       <Route path="/" element={<Home cards={cards} currentUser={currentUser} />} />
-  //       <Route path="/login" element={<Login />} />
-  //       {/* <Route path="/login" element={<Login />} /> */}
-  //       <Route path="/register" element={<Register />} />
-  //       {/* <Route path="/register" element={<Register />} /> */}
-  //       <Route path="/messages" element={
-  //       <ProtectedRoute>
-  //         <ChatBox />
-  //       </ProtectedRoute>
-  //       } />
-  //       {/* <Route path="/messages" element={<ChatBox />} /> */}
-  //     </Routes>
-  //   </div>
-  // );
 
   useEffect(() => {
     const getUsers = async () => {
@@ -71,7 +47,7 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home cards={cards} currentUser={currentUser} />} />
+        <Route path="/" element={<Home cards={cards} currentUser={currentUser} />} /> 
         <Route path="/login" element={<Login />} />
         {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<Register />} />
@@ -82,7 +58,9 @@ function App() {
         </ProtectedRoute>
         } />
         {/* <Route path="/messages" element={<ChatBox />} /> */}
-        <Route path='/details' element={<Details />} />
+        {/* <Route path='/details' element={<Details card={card} />} /> */}
+        {/* <Route path='/details' element={<Details/>} /> */}
+        <Route path='/details/:uid' element={<Details/>} />
       </Routes>
     </div>
   );

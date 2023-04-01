@@ -93,6 +93,8 @@ export const Register = () => {
               breed,
               city,
               country,
+              additionalInfo,
+              age,
               photoURL: downloadURL,
             });
 
@@ -270,7 +272,8 @@ export const Register = () => {
                   required
                   fullWidth
                   label="Additional Info"
-                  name="additional-info"
+                  name="additionalInfo"
+                  
                   type="info"
                   multiline
                   rows={4}

@@ -6,11 +6,17 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import { Link } from 'react-router-dom';
+
+import useStyles from "../../styles";
+
 export const DogItem = ({ cards }) => {
+  
+  const classes = useStyles();
+
   return (
     <>
       <Container sx={{ py: 8 }} maxWidth="md">
@@ -40,19 +46,25 @@ export const DogItem = ({ cards }) => {
                   <Typography gutterBottom variant="h4" component="h2">
                     {card.firstName}
                   </Typography>
-                  <Typography variant="h6">
+                  {/* <Typography variant="h6">
                     {card.gender.toUpperCase()}
-                  </Typography>
+                  </Typography> */}
                   <Typography>
                     {card.breed}
                   </Typography>
-                  <Typography >
+                  {/* <Typography >
                     {card.city}, {card.country}
-                  </Typography>
-                  <Typography>{card.additionalInfo}</Typography>
+                  </Typography> */}
+                  
                 </CardContent>
                 <CardActions>
-                  <Button size="small">View</Button>
+                  {/* <Button size="small" href="/details">View</Button> */}
+                  <Button size="small">
+                    {/* <Link to={`/details/${card.uid}`} className={classes.detailsLink} card={card}> */}
+                    <Link to={`/details/${card.uid}`} className={classes.detailsLink}>
+                      View
+                    </Link>
+                  </Button>
                   <Button size="small">Edit</Button>
                 </CardActions>
               </Card>

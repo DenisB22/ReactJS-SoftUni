@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'white',
     },
+    detailsLink: {
+        textDecoration: 'none',
+        color: '#1976d2',
+    },
     nameLogoContainer: {
         display: 'flex',
         justifyContent: 'center',
@@ -28,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         gap: '20px'
     },
     cardContainer: {
-        marginTop: "calc(((100vh - 64px) - 514px) / 2)",
+        marginTop: "calc(((100vh - 64px) - 570px) / 2)",
         
     }
 }));

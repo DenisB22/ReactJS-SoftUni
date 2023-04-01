@@ -22,7 +22,7 @@ import logo from "../../images/pupmatch-logo-2.png";
 
 const theme = createTheme();
 
-export const Home = ({ cards, currentUser }) => {
+export const Home = ({ cards, currentUser, getUser }) => {
   const classes = useStyles();
 
   return (
@@ -86,6 +86,7 @@ export const Home = ({ cards, currentUser }) => {
                     Register
                   </Link>
                 </Button>
+                {/* <Button onClick={getUser}>Get User</Button> */}
               </>
               }
 
