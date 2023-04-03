@@ -32,9 +32,9 @@ export const Details = () => {
 
   const classes = useStyles();
 
-  // const deleteProfile = async (uid) => {
-  //   await deleteDoc(doc(db, "users", uid));
-  // };
+  const deleteProfile = async (uid) => {
+    await deleteDoc(doc(db, "users", uid));
+  };
 
   useEffect(() => {
     const getUser = async () => {
@@ -112,7 +112,7 @@ export const Details = () => {
           </CardContent>
           <CardActions>
             <Button size="small">Message</Button>
-            <Button variant="outlined" color="error">
+            <Button variant="outlined" color="error" onClick={() => deleteProfile(uid)}>
               Delete Profile
             </Button>
           </CardActions>
