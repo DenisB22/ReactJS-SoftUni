@@ -25,6 +25,10 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: '#1976d2',
     },
+    editLink: {
+        textDecoration: 'none',
+        color: '#1976d2',
+    },
     nameLogoContainer: {
         display: 'flex',
         justifyContent: 'center',

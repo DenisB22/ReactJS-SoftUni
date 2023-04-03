@@ -65,7 +65,11 @@ export const DogItem = ({ cards }) => {
                       View
                     </Link>
                   </Button>
-                  <Button size="small">Edit</Button>
+                  <Button size="small">
+                    <Link to={`edit/${card.uid}`} className={classes.editLink}>
+                      Edit
+                    </Link>
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>

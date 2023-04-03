@@ -7,6 +7,8 @@ import { Login } from "./components/Login/Login";
 import { Register } from "./components/Register/Register";
 import { ChatBox } from './components/Chat/ChatBox';
 import { Details } from './components/Details/Details';
+import { EditProfile } from './components/EditProfile/EditProfile';
+
 
 import * as dogService from './services/dogService';
 import { AuthContext } from './context/AuthContext';
@@ -61,6 +63,8 @@ function App() {
         {/* <Route path='/details' element={<Details card={card} />} /> */}
         {/* <Route path='/details' element={<Details/>} /> */}
         <Route path='/details/:uid' element={<Details/>} />
+        {/* <Route path='edit/:uid' element={<EditProfile />} /> */}
+        <Route path='edit/:uid' element={<EditProfile />} />
       </Routes>
     </div>
   );

@@ -16,8 +16,15 @@ import { Header } from "../Header/Header";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
-
+import {
+  collection,
+  doc,
+  getDoc,
+  deleteDoc,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 export const Details = () => {
   const [card, setCard] = useState({}); // Storing the data of a single doc
@@ -25,45 +32,27 @@ export const Details = () => {
 
   const classes = useStyles();
 
-  // const getUser = async () => {
-  //   console.log('works');
-    
-    
-  //   const q = query(
-  //     collection(db, "users"),
-  //     where("uid", "==", uid)
-  //   )
-
-  //   const querySnapshot = await getDocs(q);
-  //   querySnapshot.forEach((doc) => {
-  //     console.log(doc.data());
-
-  //     setCard(doc.data());
-  //   })
-  //   console.log(card);
+  // const deleteProfile = async (uid) => {
+  //   await deleteDoc(doc(db, "users", uid));
   // };
 
   useEffect(() => {
     const getUser = async () => {
-      console.log('works');
-      
-      
-      const q = query(
-        collection(db, "users"),
-        where("uid", "==", uid)
-      )
-  
+      console.log("works");
+
+      const q = query(collection(db, "users"), where("uid", "==", uid));
+
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         console.log(doc.data());
-  
+
         setCard(doc.data());
-      })
+      });
       console.log(card);
     };
     getUser();
   }, []);
-  
+
   return (
     // <>
     //   <Header />
@@ -86,7 +75,7 @@ export const Details = () => {
     //           <Typography >
     //                 {card.city}, {card.country}
     //           </Typography>
-             
+
     //           <Typography variant="body2" color="text.secondary">
     //           {card.additionalInfo}
     //           </Typography>
@@ -95,40 +84,39 @@ export const Details = () => {
     //           <Button size="small">Message</Button>
     //         </CardActions>
     //       </Card>
-        
+
     //   </Container>
     // </>
     <>
       <Header />
       <CssBaseline />
       <Container maxWidth="md" className={classes.cardContainer}>
-          <Card sx={{ maxWidth: 850 }}>
-            <CardMedia
-              sx={{ height: "52vh" }}
-              image={card.photoURL}
-              title="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                {card.firstName}
-              </Typography>
-              <Typography variant="h6">
-                    {card.gender?.toUpperCase()}
-              </Typography>
-              <Typography >
-                    {card.city}, {card.country}
-                   
-              </Typography>
-             
-              <Typography variant="body2" color="text.secondary">
+        <Card sx={{ maxWidth: 850 }}>
+          <CardMedia
+            sx={{ height: "52vh" }}
+            image={card.photoURL}
+            title="green iguana"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {card.firstName}
+            </Typography>
+            <Typography variant="h6">{card.gender?.toUpperCase()}</Typography>
+            <Typography>
+              {card.city}, {card.country}
+            </Typography>
+
+            <Typography variant="body2" color="text.secondary">
               {card.additionalInfo}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button size="small">Message</Button>
-            </CardActions>
-          </Card>
-        
+            </Typography>
+          </CardContent>
+          <CardActions>
+            <Button size="small">Message</Button>
+            <Button variant="outlined" color="error">
+              Delete Profile
+            </Button>
+          </CardActions>
+        </Card>
       </Container>
     </>
   );
