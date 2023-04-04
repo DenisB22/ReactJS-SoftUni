@@ -1,6 +1,6 @@
 import * as React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
+
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -15,11 +15,13 @@ import { Header } from "../Header/Header";
 
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 import { db } from "../../firebase";
 import {
   collection,
   doc,
-  getDoc,
   deleteDoc,
   getDocs,
   query,
@@ -36,6 +38,7 @@ export const Details = () => {
   const deleteProfile = async (uid) => {
     await deleteDoc(doc(db, "users", uid));
     navigate('/');
+    signOut(auth);
   };
 
   useEffect(() => {
