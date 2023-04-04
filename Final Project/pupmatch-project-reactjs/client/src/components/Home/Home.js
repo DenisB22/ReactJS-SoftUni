@@ -22,7 +22,7 @@ import logo from "../../images/pupmatch-logo-2.png";
 
 const theme = createTheme();
 
-export const Home = ({ cards, currentUser, getUser }) => {
+export const Home = ({ cards, currentUser }) => {
   const classes = useStyles();
 
   return (

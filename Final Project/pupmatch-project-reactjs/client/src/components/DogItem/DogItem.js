@@ -9,11 +9,14 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
+import { useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import useStyles from "../../styles";
+import { AuthContext } from "../../context/AuthContext";
 
 export const DogItem = ({ cards }) => {
+  const { currentUser } = useContext(AuthContext);
   
   const classes = useStyles();
 
@@ -66,9 +69,12 @@ export const DogItem = ({ cards }) => {
                     </Link>
                   </Button>
                   <Button size="small">
+                    { 
+                    currentUser &&  
                     <Link to={`edit/${card.uid}`} className={classes.editLink}>
                       Edit
                     </Link>
+                    }
                   </Button>
                 </CardActions>
               </Card>

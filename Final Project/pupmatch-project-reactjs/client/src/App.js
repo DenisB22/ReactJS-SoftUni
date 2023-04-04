@@ -44,7 +44,7 @@ function App() {
     }
 
     getUsers();
-  }, [cards]);
+  }, []);
 
   return (
     <div>
@@ -52,7 +52,7 @@ function App() {
         <Route path="/" element={<Home cards={cards} currentUser={currentUser} />} /> 
         <Route path="/login" element={<Login />} />
         {/* <Route path="/login" element={<Login />} /> */}
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register setCards={setCards} />} />
         {/* <Route path="/register" element={<Register />} /> */}
         <Route path="/messages" element={
         <ProtectedRoute>

@@ -24,7 +24,9 @@ import  { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
-export const Register = () => {
+export const Register = ({
+  setCards,
+}) => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
 
@@ -97,6 +99,19 @@ export const Register = () => {
               age,
               photoURL: downloadURL,
             });
+
+            setCards(prevCards => [...prevCards, {
+              uid: res.user.uid,
+              firstName,
+              email,
+              gender,
+              breed,
+              city,
+              country,
+              additionalInfo,
+              age,
+              photoURL: downloadURL,
+            }]);
 
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
