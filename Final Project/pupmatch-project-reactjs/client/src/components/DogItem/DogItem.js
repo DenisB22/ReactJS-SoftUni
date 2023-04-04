@@ -27,6 +27,7 @@ export const DogItem = ({ cards }) => {
         <Grid container spacing={4}>
           {cards.map((card) => (
             <Grid id={card.uid} item key={card} xs={12} sm={6} md={4}>
+              
               <Card
                 sx={{
                   height: "100%",
@@ -70,7 +71,7 @@ export const DogItem = ({ cards }) => {
                   </Button>
                   <Button size="small">
                     { 
-                    currentUser &&  
+                    currentUser.uid === card.uid &&  
                     <Link to={`edit/${card.uid}`} className={classes.editLink}>
                       Edit
                     </Link>
@@ -78,6 +79,7 @@ export const DogItem = ({ cards }) => {
                   </Button>
                 </CardActions>
               </Card>
+              
             </Grid>
           ))}
         </Grid>
