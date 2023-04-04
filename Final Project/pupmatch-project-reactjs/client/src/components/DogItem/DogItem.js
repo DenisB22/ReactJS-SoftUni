@@ -37,7 +37,9 @@ export const DogItem = ({ cards }) => {
                 }}
               >
                 <CardMedia
+                  style={{ backgroundSize: 'contain' }}
                   className={classes.imageContainer}
+                  
                   component="img"
                   sx={{
                     // 16:9

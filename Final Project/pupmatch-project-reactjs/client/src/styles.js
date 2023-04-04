@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '10px',
     },
     imageContainer: {
-        height: '330px',
+        height: '400px',
         overflow: 'hidden',
         objectFit: 'cover',
     },

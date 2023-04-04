@@ -17,6 +17,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 
+
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
 import { db } from "../../firebase";
@@ -103,7 +104,8 @@ export const Details = () => {
           <CardMedia
             sx={{ height: "52vh" }}
             image={card.photoURL}
-            title="green iguana"
+            title="Dog Photo"
+            style={{ backgroundSize: 'cover' }}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
