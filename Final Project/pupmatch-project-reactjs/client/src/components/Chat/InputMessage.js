@@ -58,8 +58,8 @@ export const InputMessage = () => {
         }),
       });
     }
-    setText("");
-    setImg(null);
+    // setText("");
+    // setImg(null);
 
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
@@ -74,7 +74,10 @@ export const InputMessage = () => {
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
+    setText("");
+    setImg(null);
   };
+
 
   return (
     <div className="inputMessage">

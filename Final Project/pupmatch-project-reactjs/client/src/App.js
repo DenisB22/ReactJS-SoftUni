@@ -44,7 +44,7 @@ function App() {
     }
 
     getUsers();
-  }, []);
+  }, [cards]);
 
   return (
     <div>

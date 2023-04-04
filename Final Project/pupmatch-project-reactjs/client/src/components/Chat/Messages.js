@@ -13,9 +13,10 @@ export const Messages = () => {
             doc.exists() && setMessages(doc.data().messages)
         })
 
-        return () => {
-            unSub();
-        }
+        // return () => {
+        //     unSub();
+        // }
+        unSub();
     }, [data.chatId]);
     return (
         <div className="messages">

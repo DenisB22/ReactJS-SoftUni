@@ -13,7 +13,7 @@ import useStyles from "../../styles";
 
 import { Header } from "../Header/Header";
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import {
@@ -31,9 +31,11 @@ export const Details = () => {
   const { uid } = useParams();
 
   const classes = useStyles();
+  const navigate = useNavigate();
 
   const deleteProfile = async (uid) => {
     await deleteDoc(doc(db, "users", uid));
+    navigate('/');
   };
 
   useEffect(() => {
