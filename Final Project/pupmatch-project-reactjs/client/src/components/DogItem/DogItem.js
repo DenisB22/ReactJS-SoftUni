@@ -36,6 +36,7 @@ export const DogItem = ({ cards }) => {
                 }}
               >
                 <CardMedia
+                  className={classes.imageContainer}
                   component="img"
                   sx={{
                     // 16:9
@@ -71,7 +72,7 @@ export const DogItem = ({ cards }) => {
                   </Button>
                   <Button size="small">
                     { 
-                    currentUser.uid === card.uid &&  
+                    (currentUser && currentUser.uid === card.uid) &&  
                     <Link to={`edit/${card.uid}`} className={classes.editLink}>
                       Edit
                     </Link>

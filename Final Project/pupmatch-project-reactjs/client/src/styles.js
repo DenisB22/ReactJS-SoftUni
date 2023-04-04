@@ -9,6 +9,11 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '10px',
         marginBottom: '10px',
     },
+    imageContainer: {
+        height: '330px',
+        overflow: 'hidden',
+        objectFit: 'cover',
+    },
     loginLink: {
         textDecoration: 'none',
         color: 'white',
