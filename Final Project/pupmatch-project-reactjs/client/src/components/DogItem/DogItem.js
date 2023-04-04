@@ -13,6 +13,7 @@ import { useContext } from "react";
 import { Link } from 'react-router-dom';
 
 import useStyles from "../../styles";
+
 import { AuthContext } from "../../context/AuthContext";
 
 export const DogItem = ({ cards }) => {

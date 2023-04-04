@@ -1,6 +1,6 @@
 import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
 
+import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -12,9 +12,10 @@ import Typography from "@mui/material/Typography";
 import useStyles from "../../styles";
 
 import { Header } from "../Header/Header";
+import { AuthContext } from "../../context/AuthContext";
 
 import { useParams, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -31,6 +32,8 @@ import {
 export const Details = () => {
   const [card, setCard] = useState({}); // Storing the data of a single doc
   const { uid } = useParams();
+
+  const { currentUser } = useContext(AuthContext);
 
   const classes = useStyles();
   const navigate = useNavigate();
@@ -117,9 +120,12 @@ export const Details = () => {
           </CardContent>
           <CardActions>
             <Button size="small">Message</Button>
-            <Button variant="outlined" color="error" onClick={() => deleteProfile(uid)}>
-              Delete Profile
-            </Button>
+            {
+            (currentUser && currentUser.uid === card.uid) &&
+              <Button variant="outlined" color="error" onClick={() => deleteProfile(uid)}>
+                Delete Profile
+              </Button>  
+            }
           </CardActions>
         </Card>
       </Container>
