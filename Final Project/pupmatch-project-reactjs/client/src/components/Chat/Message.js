@@ -27,11 +27,9 @@ export const Message = ({ message }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
-  const handleDelete = async () => {
-    // await deleteMessage(message.id);
-  };
+  
 
-  const printMessage = async (message) => {
+  const handleDelete = async (message) => {
     if (message.senderId === currentUser.uid) {
       console.log(currentUser);
       console.log(message);
@@ -91,7 +89,7 @@ export const Message = ({ message }) => {
           {message.text}
           <Button
             style={{ minWidth: "10px" }}
-            onClick={() => printMessage(message)}
+            onClick={() => handleDelete(message)}
           >
             x
           </Button>
