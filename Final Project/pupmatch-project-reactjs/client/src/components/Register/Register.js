@@ -60,7 +60,7 @@ export const Register = ({
     const password = data.get("password");
     const additionalInfo = data.get("additionalInfo");
 
-    console.log(file.name);
+    // console.log(file.name);
 
 
     try {

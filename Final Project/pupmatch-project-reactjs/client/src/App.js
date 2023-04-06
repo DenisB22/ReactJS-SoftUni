@@ -26,7 +26,7 @@ function App() {
   const usersCollectionRef = collection(db, "users");
 
   const {currentUser} = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const ProtectedRoute = ({children}) => {
     if(!currentUser) {
@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     const getUsers = async () => {
       const data = await getDocs(usersCollectionRef);
-      console.log(data);
+      // console.log(data);
       setCards(data.docs.map(doc => ({...doc.data(), id: doc.id})));
     }
 
@@ -62,7 +62,7 @@ function App() {
         {/* <Route path="/messages" element={<ChatBox />} /> */}
         {/* <Route path='/details' element={<Details card={card} />} /> */}
         {/* <Route path='/details' element={<Details/>} /> */}
-        <Route path='/details/:uid' element={<Details/>} />
+        <Route path='/details/:uid' element={<Details setCards={setCards}/>}/>
         {/* <Route path='edit/:uid' element={<EditProfile />} /> */}
         <Route path='edit/:uid' element={<EditProfile />} />
       </Routes>

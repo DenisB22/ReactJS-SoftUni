@@ -30,7 +30,9 @@ import {
   where,
 } from "firebase/firestore";
 
-export const Details = () => {
+export const Details = ({
+  setCards,
+}) => {
   const [card, setCard] = useState({}); // Storing the data of a single doc
   const { uid } = useParams();
 
@@ -40,6 +42,8 @@ export const Details = () => {
   const navigate = useNavigate();
 
   const deleteProfile = async (uid) => {
+    setCards(prevCards => prevCards.filter((x) => x.uid !== uid));
+    
     await deleteDoc(doc(db, "users", uid));
     navigate('/');
     signOut(auth);

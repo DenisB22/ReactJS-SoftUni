@@ -21,12 +21,13 @@ export const Searchbar = () => {
   const { currentUser } = useContext(AuthContext);
 
   const handleSearch = async () => {
-    console.log("I am in");
+    // console.log("I am in");
     const q = query(
       collection(db, "users"),
       where("firstName", "==", username)
+     
     );
-    console.log("passed");
+    // console.log("passed");
 
     try {
       const querySnapshot = await getDocs(q);
@@ -34,18 +35,19 @@ export const Searchbar = () => {
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
         setUser(doc.data());
-        console.log(doc.data());
-        console.log(doc.data().uid);
-        console.log("no errors");
+        // console.log(doc.data());
+        // console.log(doc.data().uid);
+        // console.log("no errors");
       });
     } catch (err) {
-      console.log("error");
+      // console.log("error");
       setErr(true);
     }
   };
 
-  console.log(user);
-  // console.log(currentUser);
+  // console.log(user);
+  // console.log(currentUser.displayName);
+  // console.log(currentUser.photoURL);
 
   const handleKey = (e) => {
     if (e.key === "Enter") {
@@ -60,10 +62,12 @@ export const Searchbar = () => {
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
+    
+    // console.log(combinedId);
 
     try {
       const res = await getDoc(doc(db, "chats", combinedId));
-      console.log(user);
+      // console.log(user);
 
       if (!res.exists()) {
         // create a chat in chats collection
@@ -83,11 +87,13 @@ export const Searchbar = () => {
         await updateDoc(doc(db, "userChats", user.uid), {
           [combinedId + ".userInfo"]: {
             uid: currentUser.uid,
-            firstName: currentUser.firstName,
+            // firstName: currentUser.firstName,
+            firstName: currentUser.dislayName,
             photoURL: currentUser.photoURL,
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
+        
       }
     } catch (err) {}
 

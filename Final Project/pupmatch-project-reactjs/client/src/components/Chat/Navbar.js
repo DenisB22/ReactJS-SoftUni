@@ -4,6 +4,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 export const Navbar = () => {
     const {currentUser} = useContext(AuthContext);
+    // (currentUser);
 
     return (
         <div className="navbar">
@@ -11,6 +12,7 @@ export const Navbar = () => {
             <div className="user">
                 <img src={currentUser.photoURL} alt="" />
                 <span>{currentUser.displayName}</span>
+                {/* <span>{currentUser.firstName}</span> */}
                 {/* <button>Home</button> */}
                 <Link className="button" to="/"><span>Home</span></Link>
             </div>

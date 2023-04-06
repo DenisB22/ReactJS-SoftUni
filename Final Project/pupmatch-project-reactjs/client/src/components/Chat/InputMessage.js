@@ -21,11 +21,14 @@ export const InputMessage = () => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  const messageId = uuid();
+
   const handleSend = async () => {
     if (img) {
       const storageRef = ref(storage, uuid());
 
       const uploadTask = uploadBytesResumable(storageRef, img);
+
 
       uploadTask.on(
         (error) => {
@@ -38,7 +41,8 @@ export const InputMessage = () => {
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             await updateDoc(doc(db, "chats", data.chatId), {
               messages: arrayUnion({
-                id: uuid(),
+                // id: uuid(),
+                id: messageId,
                 text,
                 senderId: currentUser.uid,
                 date: Timestamp.now(),
@@ -51,7 +55,7 @@ export const InputMessage = () => {
     } else {
       await updateDoc(doc(db, "chats", data.chatId), {
         messages: arrayUnion({
-          id: uuid(),
+          id: messageId,
           text,
           senderId: currentUser.uid,
           date: Timestamp.now(),
@@ -64,6 +68,7 @@ export const InputMessage = () => {
     await updateDoc(doc(db, "userChats", currentUser.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        id: messageId,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });
@@ -71,6 +76,7 @@ export const InputMessage = () => {
     await updateDoc(doc(db, "userChats", data.user.uid), {
       [data.chatId + ".lastMessage"]: {
         text,
+        id: messageId,
       },
       [data.chatId + ".date"]: serverTimestamp(),
     });

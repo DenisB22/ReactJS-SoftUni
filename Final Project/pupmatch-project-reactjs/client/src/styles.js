@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     cardContainer: {
         marginTop: "calc(((100vh - 64px) - 570px) / 2)",
         
-    }
+    },
 }));
 
 export default useStyles;

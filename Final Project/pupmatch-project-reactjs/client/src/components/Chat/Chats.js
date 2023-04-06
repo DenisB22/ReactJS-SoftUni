@@ -10,19 +10,19 @@ export const Chats = () => {
   const { currentUser } = useContext(AuthContext);
   const { dispatch } = useContext(ChatContext);
 
-  console.log(currentUser);
+  // console.log(currentUser);
 
   useEffect(() => {
     const getChats = () => {
       const unsub = onSnapshot(doc(db, "userChats", currentUser.uid), (doc) => {
         setChats(doc.data());
-        console.log(doc.data());
+        // console.log(doc.data());
       });
       
-      // return () => {
-      //   unsub();
-      // };
-      unsub();
+      return () => {
+        unsub();
+      };
+      // unsub();
     };
     
     if (currentUser.uid) {
@@ -31,8 +31,8 @@ export const Chats = () => {
     
   }, [currentUser.uid]);
   // console.log(Object.entries(chats));
-  console.log(chats);
-  console.log(Object.entries(chats));
+  // console.log(chats);
+  // console.log(Object.entries(chats));
   
   const handleSelect = (u) => {
     dispatch({type: "CHANGE_USER", payload: u})
@@ -48,7 +48,6 @@ export const Chats = () => {
           />
           <div className="userChatInfo">
             <span>{chat[1]?.userInfo?.firstName}</span>
-            {/* <span>{chat[1].userInfo.displayName}</span> */}
             <p>{chat[1]?.lastMessage?.text}</p>
           </div>
         </div>
