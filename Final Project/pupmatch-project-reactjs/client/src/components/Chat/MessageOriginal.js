@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 
@@ -17,8 +17,6 @@ import { db } from "../../firebase";
 
 export const Message = ({ message }) => {
   // console.log(message);
-  const [isEditing, setIsEditing] = useState(false);
-  const [updatedText, setUpdatedText] = useState(message.text);
 
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
@@ -29,11 +27,7 @@ export const Message = ({ message }) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   }, [message]);
 
-  useEffect(() => {
-    if (!isEditing) {
-      setUpdatedText(message.text);
-    }
-  }, [isEditing, message.text]);
+  
 
   const handleDelete = async (message) => {
     if (message.senderId === currentUser.uid) {
@@ -74,41 +68,6 @@ export const Message = ({ message }) => {
     }
   };
 
-  const handleEdit = async () => {
-    setIsEditing(false);
-
-    // Update the message in the `chats` collection
-    const chatQuerySnapshot = await getDocs(collection(db, "chats"));
-    chatQuerySnapshot.forEach(async (chatDocSnapshot) => {
-      const messages = chatDocSnapshot.data().messages;
-      const updatedMessages = messages.map((msg) => {
-        if (msg.id === message.id) {
-          return { ...msg, text: updatedText };
-        } else {
-          return msg;
-        }
-      });
-
-      const chatDocRef = doc(db, "chats", chatDocSnapshot.id);
-      await updateDoc(chatDocRef, { messages: updatedMessages });
-
-      // Check if the lastMessage ID matches the ID of the message being edited
-      const userChatsQuerySnapshot = await getDocs(collection(db, "userChats"));
-      userChatsQuerySnapshot.forEach(async (userChatsDocSnapshot) => {
-        console.log(userChatsDocSnapshot.data());
-        const chatData = userChatsDocSnapshot.data()[chatDocSnapshot.id];
-        const lastMessage = chatData.lastMessage;
-        if (lastMessage && lastMessage.id === message.id) {
-          // Update the text of the lastMessage
-          const userChatsDocRef = doc(db, "userChats", userChatsDocSnapshot.id);
-          await updateDoc(userChatsDocRef, {
-            [chatDocSnapshot.id + ".lastMessage.text"]: updatedText,
-          });
-        }
-      });
-    });
-  };
-
   return (
     <div
       ref={ref}
@@ -126,33 +85,16 @@ export const Message = ({ message }) => {
         <span>Just Now</span>
       </div>
       <div className="messageContent">
-        {isEditing ? (
-          <div>
-            <textarea
-              value={updatedText}
-              onChange={(e) => setUpdatedText(e.target.value)}
-            />
-            <Button onClick={handleEdit}>Save</Button>
-          </div>
-        ) : (
-          <p>
-            {message.text}
-            <Button
-            
-              style={{ minWidth: "10px" }}
-              onClick={() => handleDelete(message)}
-            >
-              x
-            </Button>
-            <Button
-            
-              style={{ minWidth: "10px" }}
-              onClick={() => setIsEditing(true)}
-            >
-              Edit
-            </Button>
-          </p>
-        )}
+        <p>
+          {message.text}
+          <Button
+            style={{ minWidth: "10px" }}
+            onClick={() => handleDelete(message)}
+          >
+            x
+          </Button>
+          <Button style={{ minWidth: "10px" }}>Edit</Button>
+        </p>
         {message.img && <img src={message.img} alt="ok" />}
       </div>
     </div>
