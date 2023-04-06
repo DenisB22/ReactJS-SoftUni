@@ -2,6 +2,8 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 
+
+import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import {
   collection,
@@ -130,7 +132,7 @@ export const Message = ({ message }) => {
       <div className="messageContent">
         {isEditing ? (
           <div>
-            <textarea
+            <TextField
               value={updatedText}
               onChange={(e) => setUpdatedText(e.target.value)}
             />
