@@ -39,7 +39,7 @@ export const Message = ({ message }) => {
     if (message.senderId === currentUser.uid) {
       console.log(currentUser);
       console.log(message);
-
+  
       // Deleting the message from the `chats` collection
       const chatQuerySnapshot = await getDocs(collection(db, "chats"));
       chatQuerySnapshot.forEach(async (chatDocSnapshot) => {
@@ -49,7 +49,7 @@ export const Message = ({ message }) => {
           // If a message was removed, update the document in Firestore
           const chatDocRef = doc(db, "chats", chatDocSnapshot.id);
           await updateDoc(chatDocRef, { messages: updatedMessages });
-
+  
           // Check if the lastMessage ID matches the ID of the message being deleted
           const userChatsQuerySnapshot = await getDocs(
             collection(db, "userChats")
@@ -58,14 +58,15 @@ export const Message = ({ message }) => {
             const lastMessage =
               userChatsDocSnapshot.data()[chatDocSnapshot.id].lastMessage;
             if (lastMessage && lastMessage.id === message.id) {
-              // Delete the lastMessage field
+              // Update the lastMessage field to the previous message in the messages array
+              const previousMessage = updatedMessages.length - 1 > 0 ? updatedMessages[updatedMessages.length - 1] : '';
               const userChatsDocRef = doc(
                 db,
                 "userChats",
                 userChatsDocSnapshot.id
               );
               await updateDoc(userChatsDocRef, {
-                [chatDocSnapshot.id + ".lastMessage"]: null,
+                [chatDocSnapshot.id + ".lastMessage"]: previousMessage,
               });
             }
           });
@@ -73,6 +74,7 @@ export const Message = ({ message }) => {
       });
     }
   };
+  
 
   const handleEdit = async () => {
     setIsEditing(false);
@@ -138,14 +140,12 @@ export const Message = ({ message }) => {
           <p>
             {message.text}
             <Button
-            
               style={{ minWidth: "10px" }}
               onClick={() => handleDelete(message)}
             >
               x
             </Button>
             <Button
-            
               style={{ minWidth: "10px" }}
               onClick={() => setIsEditing(true)}
             >
