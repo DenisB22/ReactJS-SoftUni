@@ -3,9 +3,10 @@ import { ChatContext } from '../../context/ChatContext';
 import { InputMessage } from './InputMessage'
 import { Messages } from "./Messages";
 
-export const Chat = () => {
+export const Chat = ({card}) => {
     const { data } = useContext(ChatContext);
     // console.log(data);
+    console.log(`card from Chat: ${card}`);
 
     return (
         <div className="chat">
@@ -14,7 +15,7 @@ export const Chat = () => {
                 <span>{data.user?.displayName}</span>
             </div>
             <Messages />
-            <InputMessage />
+            <InputMessage card={card} />
         </div>
     );
 };

@@ -70,7 +70,11 @@ export const Home = ({ cards, currentUser }) => {
             >
               {currentUser ? 
               <>
-                <Button href="/messages" variant="outlined">Messages</Button>
+                <Button variant="outlined">
+                  <Link to="/messages" className={classes.messagesLink}>
+                    Messages
+                  </Link>
+                </Button>
                 <Button onClick={() => signOut(auth)} variant="contained">Logout</Button>
               </> :
               <>

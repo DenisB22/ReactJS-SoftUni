@@ -9,14 +9,14 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+
 import useStyles from "../../styles";
 
 import { Header } from "../Header/Header";
 import { AuthContext } from "../../context/AuthContext";
 
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
-
 
 import { signOut } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -29,10 +29,9 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { Searchbar } from "../Chat/Searchbar";
 
-export const Details = ({
-  setCards,
-}) => {
+export const Details = ({ setCards, sendData }) => {
   const [card, setCard] = useState({}); // Storing the data of a single doc
   const { uid } = useParams();
 
@@ -42,12 +41,17 @@ export const Details = ({
   const navigate = useNavigate();
 
   const deleteProfile = async (uid) => {
-    setCards(prevCards => prevCards.filter((x) => x.uid !== uid));
-    
+    setCards((prevCards) => prevCards.filter((x) => x.uid !== uid));
+
     await deleteDoc(doc(db, "users", uid));
-    navigate('/');
+    navigate("/");
     signOut(auth);
   };
+
+  function handleClick() {
+    sendData(card);
+  }
+
 
   useEffect(() => {
     const getUser = async () => {
@@ -63,8 +67,11 @@ export const Details = ({
       });
       console.log(card);
     };
+
+    
     getUser();
-  }, []);
+  }, [uid]);
+
 
   return (
     // <>
@@ -109,7 +116,7 @@ export const Details = ({
             sx={{ height: "52vh" }}
             image={card.photoURL}
             title="Dog Photo"
-            style={{ backgroundSize: 'cover' }}
+            style={{ backgroundSize: "cover" }}
           />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -125,13 +132,21 @@ export const Details = ({
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small">Message</Button>
-            {
-            (currentUser && currentUser.uid === card.uid) &&
-              <Button variant="outlined" color="error" onClick={() => deleteProfile(uid)}>
+            {/* <Button size="small">Message</Button> */}
+            <Link to="/messages" className={classes.messagesLink} onClick={handleClick}>
+                    Message
+            </Link>
+            
+            {currentUser && currentUser.uid === card.uid && (
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => deleteProfile(uid)}
+              >
                 Delete Profile
-              </Button>  
-            }
+              </Button>
+            
+            )}
           </CardActions>
         </Card>
       </Container>
