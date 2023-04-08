@@ -18,6 +18,7 @@ import { collection,  getDocs } from 'firebase/firestore';
 
 import './components/Chat/style.scss';
 import { Button } from '@mui/material';
+import { ChatContextProvider } from './context/ChatContext';
 
 
 function App() {
@@ -61,6 +62,7 @@ function App() {
 
 
   return (
+    
     <div>
       <Routes>
         <Route path="/" element={<Home cards={cards} currentUser={currentUser} />} /> 
