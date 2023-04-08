@@ -133,9 +133,12 @@ export const Details = ({ setCards, sendData }) => {
           </CardContent>
           <CardActions>
             {/* <Button size="small">Message</Button> */}
+            {
+            card.uid !== currentUser.uid && 
             <Link to="/messages" className={classes.messagesLink} onClick={handleClick}>
                     Message
             </Link>
+            }
             
             {currentUser && currentUser.uid === card.uid && (
               <Button
