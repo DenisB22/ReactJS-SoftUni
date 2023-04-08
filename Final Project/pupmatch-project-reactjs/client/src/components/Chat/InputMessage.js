@@ -139,7 +139,7 @@ export const InputMessage = ({card}) => {
             }),
           });
     
-          await updateDoc(doc(db, "userChats", currentUser.uid), {
+           await updateDoc(doc(db, "userChats", currentUser.uid), {
             [data.chatId + ".lastMessage"]: {
               text: 'Hello',
               id: messageId,

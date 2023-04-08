@@ -18,6 +18,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 export const DogItem = ({ cards }) => {
   const { currentUser } = useContext(AuthContext);
+  
   console.log(cards);
   
   const classes = useStyles();
@@ -27,7 +28,7 @@ export const DogItem = ({ cards }) => {
       <Container sx={{ py: 8 }} maxWidth="md">
         {/* End hero unit */}
         <Grid container spacing={4}>
-          {cards.map((card) => (
+          {cards && cards.map((card) => (
             <Grid id={card.uid} item key={card} xs={12} sm={6} md={4}>
               
               <Card
@@ -52,7 +53,7 @@ export const DogItem = ({ cards }) => {
                   alt="random"
                 />
                 <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography gutterBottom variant="h4" component="h2">
+                  <Typography gutterBottom variant="h4" component="h2" id='firstName'>
                     {card.firstName}
                   </Typography>
                   {/* <Typography variant="h6">
@@ -89,7 +90,7 @@ export const DogItem = ({ cards }) => {
           ))}
         </Grid>
       </Container>
-      {cards.length === 0 && (
+      {cards?.length === 0 && (
                 <Box
                 container
                 spacing={0}

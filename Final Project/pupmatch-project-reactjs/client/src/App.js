@@ -27,6 +27,7 @@ function App() {
   const usersCollectionRef = collection(db, "users");
 
   const {currentUser} = useContext(AuthContext);
+ 
   // console.log(currentUser);
 
 
