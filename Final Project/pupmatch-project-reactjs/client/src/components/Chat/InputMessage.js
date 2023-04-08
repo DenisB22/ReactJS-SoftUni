@@ -90,36 +90,41 @@ export const InputMessage = ({card}) => {
   };
 
   useEffect(() => {
-    // console.log(card);
     if (Object.keys(card).length > 0) {
-      // console.log('Hello')
-      // console.log(card.uid);
       const handleUserFromDetails = async() => {
         if (img) {
-          // console.log('img');
           const storageRef = ref(storage, uuid());
-    
           const uploadTask = uploadBytesResumable(storageRef, img);
-    
     
           uploadTask.on(
             (error) => {
-              // Handle unsuccessful uploads
-              //   setErr(true);
             },
             () => {
-              // Handle successful uploads on complete
-              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
               getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
                 await updateDoc(doc(db, "chats", data.chatId), {
                   messages: arrayUnion({
-                    // id: uuid(),
                     id: messageId,
                     text: 'Hello',
                     senderId: currentUser.uid,
                     date: Timestamp.now(),
                     img: downloadURL,
                   }),
+                });
+    
+                await updateDoc(doc(db, "userChats", currentUser.uid), {
+                  [data.chatId + ".lastMessage"]: {
+                    text: 'Hello',
+                    id: messageId,
+                  },
+                  [data.chatId + ".date"]: serverTimestamp(),
+                });
+    
+                await updateDoc(doc(db, "userChats", card.uid), {
+                  [data.chatId + ".lastMessage"]: {
+                    text: 'Hello',
+                    id: messageId,
+                  },
+                  [data.chatId + ".date"]: serverTimestamp(),
                 });
               });
             }
@@ -133,25 +138,23 @@ export const InputMessage = ({card}) => {
               date: Timestamp.now(),
             }),
           });
+    
+          await updateDoc(doc(db, "userChats", currentUser.uid), {
+            [data.chatId + ".lastMessage"]: {
+              text: 'Hello',
+              id: messageId,
+            },
+            [data.chatId + ".date"]: serverTimestamp(),
+          });
+    
+          await updateDoc(doc(db, "userChats", card.uid), {
+            [data.chatId + ".lastMessage"]: {
+              text: 'Hello',
+              id: messageId,
+            },
+            [data.chatId + ".date"]: serverTimestamp(),
+          });
         }
-        // setText("");
-        // setImg(null);
-    
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
-          [data.chatId + ".lastMessage"]: {
-            text,
-            id: messageId,
-          },
-          [data.chatId + ".date"]: serverTimestamp(),
-        });
-    
-        await updateDoc(doc(db, "userChats", card.uid), {
-          [data.chatId + ".lastMessage"]: {
-            text,
-            id: messageId,
-          },
-          [data.chatId + ".date"]: serverTimestamp(),
-        });
         setText("");
         setImg(null);
       }
