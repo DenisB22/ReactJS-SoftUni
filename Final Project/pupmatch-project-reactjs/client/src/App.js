@@ -39,22 +39,22 @@ function App() {
   };
 
   const getCardFromDetails = (dataFromDetails) =>  {
-    console.log('Hello from getCardFromDetails')
+    // console.log('Hello from getCardFromDetails')
     setCard(dataFromDetails);
-    console.log('hello')
-    console.log(`card from App: ${dataFromDetails}`);
+    // console.log('hello')
+    // console.log(`card from App: ${dataFromDetails}`);
     
   }
 
   useEffect(() => {
-    console.log('Hello from useEffect');
+    // console.log('Hello from useEffect');
     const getUsers = async () => {
-      console.log("getUsers called");
+      // console.log("getUsers called");
       const data = await getDocs(usersCollectionRef);
       // console.log(data);
       setCards(data.docs.map(doc => ({...doc.data(), id: doc.id})));
     }
-    console.log(cards.length)
+    // console.log(cards.length)
     getUsers();
   }, []);
 

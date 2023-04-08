@@ -55,14 +55,14 @@ export const Details = ({ setCards, sendData }) => {
 
   useEffect(() => {
     const getUser = async () => {
-      // console.log("works");
+      console.log("works");
 
       const q = query(collection(db, "users"), where("uid", "==", uid));
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        // console.log(doc.data());
-
+        console.log(doc.data());
+        
         setCard(doc.data());
       });
       // console.log(card);
@@ -134,13 +134,13 @@ export const Details = ({ setCards, sendData }) => {
           <CardActions>
             {/* <Button size="small">Message</Button> */}
             {
-            card.uid !== currentUser.uid && 
+            (currentUser && card.uid !== currentUser.uid) && 
             <Link to="/messages" className={classes.messagesLink} onClick={handleClick}>
                     Message
             </Link>
             }
             
-            {currentUser && currentUser.uid === card.uid && (
+            {(currentUser && currentUser.uid === card.uid) && (
               <Button
                 variant="outlined"
                 color="error"

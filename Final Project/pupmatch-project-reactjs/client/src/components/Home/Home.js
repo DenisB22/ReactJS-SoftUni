@@ -24,6 +24,7 @@ const theme = createTheme();
 
 export const Home = ({ cards, currentUser }) => {
   const classes = useStyles();
+  console.log(cards);
 
   return (
     <ThemeProvider theme={theme}>
