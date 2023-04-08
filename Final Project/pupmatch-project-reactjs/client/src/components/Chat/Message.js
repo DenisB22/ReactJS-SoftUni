@@ -24,6 +24,8 @@ export const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
+  console.log(message);
+
   const ref = useRef();
 
   useEffect(() => {
@@ -142,7 +144,7 @@ export const Message = ({ message }) => {
         ) : (
           <p>
             {message.text}
-            <Button
+            {/* <Button
               style={{ minWidth: "10px" }}
               onClick={() => handleDelete(message)}
             >
@@ -153,7 +155,24 @@ export const Message = ({ message }) => {
               onClick={() => setIsEditing(true)}
             >
               Edit
-            </Button>
+            </Button> */}
+
+            {message.senderId === currentUser.uid && (
+              <>
+                <Button
+                  style={{ minWidth: "10px" }}
+                  onClick={() => handleDelete(message)}
+                >
+                  x
+                </Button>
+                <Button
+                  style={{ minWidth: "10px" }}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit
+                </Button>
+              </>
+            )}
           </p>
         )}
         {message.img && <img src={message.img} alt="ok" />}
