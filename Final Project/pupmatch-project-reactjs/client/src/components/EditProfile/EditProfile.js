@@ -18,13 +18,15 @@ import { Footer } from "../Footer/Footer";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc } from "firebase/firestore";
+import {  collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import  { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
-export const EditProfile = () => {
+export const EditProfile = ({
+  setCards,
+}) => {
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
   const { uid } = useParams();
@@ -32,19 +34,19 @@ export const EditProfile = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      displayName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      city: data.get("city"),
-      country: data.get("country"),
-      gender: data.get("gender"),
-      age: data.get("age"),
-      breed: data.get("breed"),
-      imageUrl: data.get("imageUrl"),
-      email: data.get("email"),
-      password: data.get("password"),
-      additionalInfo: data.get("additionalInfo"),
-    });
+    // console.log({
+    //   displayName: data.get("firstName"),
+    //   lastName: data.get("lastName"),
+    //   city: data.get("city"),
+    //   country: data.get("country"),
+    //   gender: data.get("gender"),
+    //   age: data.get("age"),
+    //   breed: data.get("breed"),
+    //   imageUrl: data.get("imageUrl"),
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   additionalInfo: data.get("additionalInfo"),
+    // });
     // console.log(event.target);
 
     const firstName = data.get("firstName");
@@ -59,7 +61,7 @@ export const EditProfile = () => {
     const password = data.get("password");
     const additionalInfo = data.get("additionalInfo");
 
-    console.log(file.name);
+    // console.log(file.name);
 
 
     try {
@@ -99,7 +101,11 @@ export const EditProfile = () => {
               age,
               photoURL: downloadURL,
             });
-
+            
+            const updatedProfile = await getDocs(collection(db, "users"));
+            setCards(updatedProfile.docs.map((doc) => (
+              {...doc.data()}
+            )))
             navigate("/");
           });
 

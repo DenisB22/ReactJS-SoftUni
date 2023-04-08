@@ -31,8 +31,8 @@ export const Message = ({ message }) => {
 
   const handleDelete = async (message) => {
     if (message.senderId === currentUser.uid) {
-      console.log(currentUser);
-      console.log(message);
+      // console.log(currentUser);
+      // console.log(message);
 
       // Deleting the message from the `chats` collection
       const chatQuerySnapshot = await getDocs(collection(db, "chats"));

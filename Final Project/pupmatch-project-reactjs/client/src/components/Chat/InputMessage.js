@@ -28,7 +28,7 @@ export const InputMessage = ({card}) => {
   const messageId = uuid();
 
   const handleSend = async () => {
-    console.log('triggered');
+    // console.log('triggered');
     if (img) {
       const storageRef = ref(storage, uuid());
 
@@ -90,10 +90,10 @@ export const InputMessage = ({card}) => {
   };
 
   useEffect(() => {
-    console.log(card);
+    // console.log(card);
     if (Object.keys(card).length > 0) {
-      console.log('Hello')
-      console.log(card.uid);
+      // console.log('Hello')
+      // console.log(card.uid);
       const handleUserFromDetails = async() => {
         if (img) {
           console.log('img');

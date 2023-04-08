@@ -56,7 +56,7 @@ function App() {
     }
     console.log(cards.length)
     getUsers();
-  }, [cards.length]);
+  }, []);
 
 
 
@@ -78,7 +78,7 @@ function App() {
         {/* <Route path='/details' element={<Details/>} /> */}
         <Route path='/details/:uid' element={<Details setCards={setCards} sendData={getCardFromDetails}/>}/>
         {/* <Route path='edit/:uid' element={<EditProfile />} /> */}
-        <Route path='edit/:uid' element={<EditProfile />} />
+        <Route path='edit/:uid' element={<EditProfile setCards={setCards} />} />
         
       </Routes>
     </div>

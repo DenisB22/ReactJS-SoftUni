@@ -55,17 +55,17 @@ export const Details = ({ setCards, sendData }) => {
 
   useEffect(() => {
     const getUser = async () => {
-      console.log("works");
+      // console.log("works");
 
       const q = query(collection(db, "users"), where("uid", "==", uid));
 
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        console.log(doc.data());
+        // console.log(doc.data());
 
         setCard(doc.data());
       });
-      console.log(card);
+      // console.log(card);
     };
 
     
