@@ -2,7 +2,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { ChatContext } from "../../context/ChatContext";
 
-
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import {
@@ -41,7 +40,7 @@ export const Message = ({ message }) => {
     if (message.senderId === currentUser.uid) {
       // (currentUser);
       // console.log(message);
-  
+
       // Deleting the message from the `chats` collection
       const chatQuerySnapshot = await getDocs(collection(db, "chats"));
       chatQuerySnapshot.forEach(async (chatDocSnapshot) => {
@@ -51,17 +50,20 @@ export const Message = ({ message }) => {
           // If a message was removed, update the document in Firestore
           const chatDocRef = doc(db, "chats", chatDocSnapshot.id);
           await updateDoc(chatDocRef, { messages: updatedMessages });
-  
+
           // Check if the lastMessage ID matches the ID of the message being deleted
           const userChatsQuerySnapshot = await getDocs(
             collection(db, "userChats")
           );
           userChatsQuerySnapshot.forEach(async (userChatsDocSnapshot) => {
             const lastMessage =
-              userChatsDocSnapshot.data()[chatDocSnapshot.id].lastMessage;
+              userChatsDocSnapshot.data()[chatDocSnapshot.id]?.lastMessage;
             if (lastMessage && lastMessage.id === message.id) {
               // Update the lastMessage field to the previous message in the messages array
-              const previousMessage = updatedMessages.length - 1 > 0 ? updatedMessages[updatedMessages.length - 1] : '';
+              const previousMessage =
+                updatedMessages.length - 1 > 0
+                  ? updatedMessages[updatedMessages.length - 1]
+                  : "";
               const userChatsDocRef = doc(
                 db,
                 "userChats",
@@ -76,7 +78,6 @@ export const Message = ({ message }) => {
       });
     }
   };
-  
 
   const handleEdit = async () => {
     setIsEditing(false);

@@ -18,7 +18,6 @@ import { collection,  getDocs } from 'firebase/firestore';
 
 import './components/Chat/style.scss';
 import { Button } from '@mui/material';
-import { ChatContextProvider } from './context/ChatContext';
 
 
 function App() {

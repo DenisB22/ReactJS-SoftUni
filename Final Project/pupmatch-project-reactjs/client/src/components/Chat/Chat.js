@@ -6,6 +6,7 @@ import { Messages } from "./Messages";
 export const Chat = ({card}) => {
     const { data } = useContext(ChatContext);
     // console.log(data);
+    // console.log(data);
     // (`card from Chat: ${card}`);
 
     return (

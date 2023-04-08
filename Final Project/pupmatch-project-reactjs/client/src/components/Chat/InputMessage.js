@@ -96,7 +96,7 @@ export const InputMessage = ({card}) => {
       // console.log(card.uid);
       const handleUserFromDetails = async() => {
         if (img) {
-          console.log('img');
+          // console.log('img');
           const storageRef = ref(storage, uuid());
     
           const uploadTask = uploadBytesResumable(storageRef, img);

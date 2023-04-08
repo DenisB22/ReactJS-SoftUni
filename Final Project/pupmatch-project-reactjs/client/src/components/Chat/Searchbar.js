@@ -76,7 +76,12 @@ export const Searchbar = () => {
         await setDoc(doc(db, "chats", combinedId), { messages: [] });
 
         // create user chats
-        
+        console.log(doc(db, "chats", user.uid));
+        console.log(`user uid: ${user.uid}`);
+        // console.log(`user firstName: ${user.displayName}`);
+        console.log(`user firstName: ${user.firstName}`);
+        console.log(`user photoURL: ${user.photoURL}`);
+
         await updateDoc(doc(db, "userChats", currentUser.uid), {
           [combinedId + ".userInfo"]: {
             uid: user.uid,
@@ -85,16 +90,38 @@ export const Searchbar = () => {
           },
           [combinedId + ".date"]: serverTimestamp(),
         });
-        
-        await updateDoc(doc(db, "userChats", user.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: currentUser.uid,
-            // firstName: currentUser.firstName,
-            firstName: currentUser.dislayName,
-            photoURL: currentUser.photoURL,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
-        });
+
+        console.log(`user await works correctly!`);
+
+        console.log(doc(db, "userChats", user.uid));
+        console.log(`currentUser uid: ${currentUser.uid}`);
+        console.log(`currentUser firstName: ${currentUser.displayName}`);
+        // console.log(`currentUser firstName: ${currentUser.firstName}`);
+        console.log(`currentUser photoURL: ${currentUser.photoURL}`);
+        // await updateDoc(doc(db, "userChats", user.uid), {
+        //   [combinedId + ".userInfo"]: {
+        //     uid: currentUser.uid,
+        //     // firstName: currentUser.firstName,
+        //     firstName: currentUser.displayName,
+        //     photoURL: currentUser.photoURL,
+        //   },
+        //   [combinedId + ".date"]: serverTimestamp(),
+        // });
+
+        try {
+          await updateDoc(doc(db, "userChats", user.uid), {
+            [combinedId + ".userInfo"]: {
+              uid: currentUser.uid,
+              firstName: currentUser.displayName,
+              photoURL: currentUser.photoURL,
+            },
+            [combinedId + ".date"]: serverTimestamp(),
+          });
+          console.log(`currentUser await works correctly!`);
+        } catch (error) {
+          console.error("Error updating user chat info:", error);
+        }
+        console.log(`currentUser await works correctly!`);
         
       }
     } catch (err) {}
