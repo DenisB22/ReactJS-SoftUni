@@ -32,6 +32,7 @@ export const DogItem = ({ cards }) => {
             <Grid id={card.uid} item key={card} xs={12} sm={6} md={4}>
               
               <Card
+              className="dog-item"
                 sx={{
                   height: "100%",
                   display: "flex",

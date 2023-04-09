@@ -11,7 +11,7 @@ import { EditProfile } from './components/EditProfile/EditProfile';
 
 
 import * as dogService from './services/dogService';
-import { AuthContext } from './context/AuthContext';
+import { AuthContext, AuthContextProvider } from './context/AuthContext';
 
 import { db } from './firebase';
 import { collection,  getDocs } from 'firebase/firestore';
@@ -78,7 +78,10 @@ function App() {
         {/* <Route path="/messages" element={<ChatBox />} /> */}
         {/* <Route path='/details' element={<Details card={card} />} /> */}
         {/* <Route path='/details' element={<Details/>} /> */}
-        <Route path='/details/:uid' element={<Details setCards={setCards} sendData={getCardFromDetails}/>}/>
+        <AuthContextProvider>
+
+          <Route path='/details/:uid' element={<Details setCards={setCards} sendData={getCardFromDetails}/>}/>
+        </AuthContextProvider>
         {/* <Route path='edit/:uid' element={<EditProfile />} /> */}
         <Route path='edit/:uid' element={<EditProfile setCards={setCards} />} />
         
