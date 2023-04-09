@@ -15,7 +15,7 @@ import Container from "@mui/material/Container";
 import { useState } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Footer } from "../Footer/Footer";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {  collection, doc, getDocs, updateDoc } from "firebase/firestore";
@@ -66,6 +66,16 @@ export const EditProfile = ({
 
     try {
       // const res = await createUserWithEmailAndPassword(auth, email, password);
+      const user = auth.currentUser;
+      if (user) {
+        if (email !== user.email) {
+          await updateEmail(user, email);
+        }
+        if (password) {
+          await updatePassword(user, password);
+        }
+      }
+
 
       const storageRef = ref(storage, firstName);
       // const storageRef = ref(storage, uid);
@@ -98,6 +108,7 @@ export const EditProfile = ({
               city,
               country,
               additionalInfo,
+              password,
               age,
               photoURL: downloadURL,
             });
