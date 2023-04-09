@@ -18,7 +18,7 @@ import { db, storage } from "../../firebase";
 import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 
-export const InputMessage = ({card}) => {
+export const InputMessage = ({card, clearChat, updateClearChatState}) => {
   const [text, setText] = useState("");
   const [img, setImg] = useState(null);
 
@@ -39,6 +39,7 @@ export const InputMessage = ({card}) => {
         (error) => {
           // Handle unsuccessful uploads
           //   setErr(true);
+          <span>Something went wrong</span>
         },
         () => {
           // Handle successful uploads on complete
@@ -90,14 +91,21 @@ export const InputMessage = ({card}) => {
   };
 
   useEffect(() => {
-    if (Object.keys(card).length > 0) {
+    if (!clearChat) {
+      updateClearChatState(true);
+      console.log(clearChat);
+      // console.log(Object.keys(card).length);
+      // console.log(Object.keys(card));
+      // console.log(card);
       const handleUserFromDetails = async() => {
         if (img) {
           const storageRef = ref(storage, uuid());
           const uploadTask = uploadBytesResumable(storageRef, img);
+          console.log(data.chatId);
     
           uploadTask.on(
             (error) => {
+              <span>Something went wrong</span>
             },
             () => {
               getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
@@ -139,7 +147,7 @@ export const InputMessage = ({card}) => {
             }),
           });
     
-           await updateDoc(doc(db, "userChats", currentUser.uid), {
+          await updateDoc(doc(db, "userChats", currentUser.uid), {
             [data.chatId + ".lastMessage"]: {
               text: 'Hello',
               id: messageId,
@@ -160,7 +168,7 @@ export const InputMessage = ({card}) => {
       }
       handleUserFromDetails();
     }
-  }, [card.uid]);
+  }, [clearChat]);
   
 
   return (

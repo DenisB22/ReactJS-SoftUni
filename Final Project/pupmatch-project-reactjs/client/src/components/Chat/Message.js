@@ -24,7 +24,7 @@ export const Message = ({ message }) => {
   const { currentUser } = useContext(AuthContext);
   const { data } = useContext(ChatContext);
 
-  console.log(message);
+  // console.log(message);
 
   const ref = useRef();
 
@@ -102,7 +102,7 @@ export const Message = ({ message }) => {
       // Check if the lastMessage ID matches the ID of the message being edited
       const userChatsQuerySnapshot = await getDocs(collection(db, "userChats"));
       userChatsQuerySnapshot.forEach(async (userChatsDocSnapshot) => {
-        console.log(userChatsDocSnapshot.data());
+        // console.log(userChatsDocSnapshot.data());
         const chatData = userChatsDocSnapshot.data()[chatDocSnapshot.id];
         const lastMessage = chatData.lastMessage;
         if (lastMessage && lastMessage.id === message.id) {

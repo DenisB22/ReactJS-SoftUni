@@ -17,12 +17,13 @@ import { db } from './firebase';
 import { collection,  getDocs } from 'firebase/firestore';
 
 import './components/Chat/style.scss';
-import { Button } from '@mui/material';
 
 
 function App() {
   const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
   const [card, setCard] = useState({});
+  const [clearChat, setClearChat] = useState(false);
+
 
   const usersCollectionRef = collection(db, "users");
 
@@ -44,8 +45,13 @@ function App() {
     setCard(dataFromDetails);
     // console.log('hello')
     // console.log(`card from App: ${dataFromDetails}`);
-    
+    setClearChat(false);
   }
+
+  function updateClearChatState(value) {
+    setClearChat(value);
+  }
+
 
   useEffect(() => {
     // console.log('Hello from useEffect');
@@ -72,16 +78,16 @@ function App() {
         {/* <Route path="/register" element={<Register />} /> */}
         <Route path="/messages" element={
         <ProtectedRoute>
-          <ChatBox card={card} />
+          <ChatBox card={card} clearChat={clearChat} updateClearChatState={updateClearChatState} />
         </ProtectedRoute>
         } />
         {/* <Route path="/messages" element={<ChatBox />} /> */}
         {/* <Route path='/details' element={<Details card={card} />} /> */}
         {/* <Route path='/details' element={<Details/>} /> */}
-        <AuthContextProvider>
+        
 
           <Route path='/details/:uid' element={<Details setCards={setCards} sendData={getCardFromDetails}/>}/>
-        </AuthContextProvider>
+
         {/* <Route path='edit/:uid' element={<EditProfile />} /> */}
         <Route path='edit/:uid' element={<EditProfile setCards={setCards} />} />
         

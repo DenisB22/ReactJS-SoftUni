@@ -3,7 +3,7 @@ import { ChatContext } from '../../context/ChatContext';
 import { InputMessage } from './InputMessage'
 import { Messages } from "./Messages";
 
-export const Chat = ({card}) => {
+export const Chat = ({card, clearChat, updateClearChatState}) => {
     const { data } = useContext(ChatContext);
     // console.log(data);
     // console.log(data);
@@ -16,7 +16,7 @@ export const Chat = ({card}) => {
                 <span>{data.user?.displayName}</span>
             </div>
             <Messages />
-            <InputMessage card={card} />
+            <InputMessage card={card} clearChat={clearChat} updateClearChatState={updateClearChatState} />
         </div>
     );
 };

@@ -22,8 +22,8 @@ export const Searchbar = () => {
 
   const handleSearch = async () => {
     // console.log("I am in");
-    console.log(`Username: ${username}`)
-    console.log(`Users: ${collection(db, "users")}`);
+    // console.log(`Username: ${username}`)
+    // console.log(`Users: ${collection(db, "users")}`);
     const q = query(
       collection(db, "users"),
       where("firstName", "==", username)
@@ -35,7 +35,7 @@ export const Searchbar = () => {
 
       querySnapshot.forEach((doc) => {
         // doc.data() is never undefined for query doc snapshots
-        console.log(`User: ${doc.data()}`);
+        // console.log(`User: ${doc.data()}`);
         setUser(doc.data());
         // console.log(doc.data());
         // console.log(doc.data().uid);
