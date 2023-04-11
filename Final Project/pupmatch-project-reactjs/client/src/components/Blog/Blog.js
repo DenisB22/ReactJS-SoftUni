@@ -66,7 +66,7 @@ const posts = [post1, post2, post3];
 const sidebar = {
   title: 'About',
   description:
-    'Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.',
+    'Welcome to Pupmatch, the ultimate social platform for dog lovers! Whether you want to find new furry friends for your pup, chat with fellow dog enthusiasts, or share funny and heartwarming stories about your four-legged companion, Pupmatch is the perfect place for you. Join our vibrant community and unleash the joy of dog ownership today!',
   archives: [
     { title: 'March 2020', url: '#' },
     { title: 'February 2020', url: '#' },
@@ -82,8 +82,6 @@ const sidebar = {
   ],
   social: [
     { name: 'GitHub', icon: GitHubIcon },
-    { name: 'Twitter', icon: TwitterIcon },
-    { name: 'Facebook', icon: FacebookIcon },
   ],
 };
 

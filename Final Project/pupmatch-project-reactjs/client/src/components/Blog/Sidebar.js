@@ -33,7 +33,7 @@ function Sidebar(props) {
         <Link
           display="block"
           variant="body1"
-          href="#"
+          href="https://github.com/DenisB22/ReactJS-SoftUni/tree/main/Final%20Project/pupmatch-project-reactjs"
           key={network.name}
           sx={{ mb: 0.5 }}
         >
