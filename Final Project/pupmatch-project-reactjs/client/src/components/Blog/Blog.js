@@ -16,6 +16,10 @@ import post1 from './blog-post.1.md';
 import post2 from './blog-post.2.md';
 import post3 from './blog-post.3.md';
 
+import { useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../firebase';
+
 const sections = [
   { title: 'Technology', url: '#' },
   { title: 'Design', url: '#' },
@@ -38,24 +42,24 @@ const mainFeaturedPost = {
   linkText: 'Create Post',
 };
 
-const featuredPosts = [
-  {
-    title: 'Featured post',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-  {
-    title: 'Post title',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageLabel: 'Image Text',
-  },
-];
+// const featuredPosts = [
+//   {
+//     title: 'Featured post',
+//     date: 'Nov 12',
+//     description:
+//       'This is a wider card with supporting text below as a natural lead-in to additional content.',
+//     image: 'https://source.unsplash.com/random',
+//     imageLabel: 'Image Text',
+//   },
+//   {
+//     title: 'Post title',
+//     date: 'Nov 11',
+//     description:
+//       'This is a wider card with supporting text below as a natural lead-in to additional content.',
+//     image: 'https://source.unsplash.com/random',
+//     imageLabel: 'Image Text',
+//   },
+// ];
 
 const posts = [post1, post2, post3];
 
@@ -86,6 +90,24 @@ const sidebar = {
 const theme = createTheme();
 
 export default function Blog() {
+  const [featuredPosts, setFeaturedPosts] = useState([]);
+
+  const postsCollectionRef = collection(db, 'blogPosts');
+  console.log(postsCollectionRef);
+
+  useEffect(() => {
+    const getPosts = async() => {
+      const data = await getDocs(postsCollectionRef);
+      console.log(data.docs);
+
+      setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      console.log(typeof featuredPosts);
+    }
+
+    getPosts();
+
+  }, [])
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -97,6 +119,7 @@ export default function Blog() {
             {featuredPosts.map((post) => (
               <FeaturedPost key={post.title} post={post} />
             ))}
+            
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />

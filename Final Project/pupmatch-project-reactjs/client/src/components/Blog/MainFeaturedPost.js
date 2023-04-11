@@ -56,7 +56,7 @@ function MainFeaturedPost(props) {
             <Typography variant="h5" color="inherit" paragraph>
               {post.description}
             </Typography>
-            <Button variant="outlined">
+            <Button variant="outlined" className={classes.createPostButton}>
                   <Link to="/create-post" className={classes.createPostLink}>
                     {post.linkText}
                   </Link>

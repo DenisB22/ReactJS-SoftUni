@@ -22,18 +22,18 @@ function FeaturedPost(props) {
               {post.date}
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.content}
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...
             </Typography>
           </CardContent>
-          <CardMedia
+          {/* <CardMedia
             component="img"
             sx={{ width: 160, display: { xs: 'none', sm: 'block' } }}
-            image={post.image}
-            alt={post.imageLabel}
-          />
+            // image={post.image}
+            // alt={post.imageLabel}
+          /> */}
         </Card>
       </CardActionArea>
     </Grid>

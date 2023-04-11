@@ -54,6 +54,7 @@ function App() {
     const getUsers = async () => {
       // console.log("getUsers called");
       const data = await getDocs(usersCollectionRef);
+      console.log(data.docs);
       // console.log(data);
       setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
