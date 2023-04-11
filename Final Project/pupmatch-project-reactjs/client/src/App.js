@@ -7,7 +7,7 @@ import { Register } from "./components/Register/Register";
 import { ChatBox } from "./components/Chat/ChatBox";
 import { Details } from "./components/Details/Details";
 import { EditProfile } from "./components/EditProfile/EditProfile";
-import Blog from './components/Blog/Blog';
+import Blog from "./components/Blog/Blog";
 
 import * as dogService from "./services/dogService";
 import { AuthContext, AuthContextProvider } from "./context/AuthContext";
@@ -28,7 +28,7 @@ function App() {
 
   const usersCollectionRef = collection(db, "users");
 
-  const postsCollectionRef = collection(db, 'blogPosts');
+  const postsCollectionRef = collection(db, "blogPosts");
 
   const { currentUser } = useContext(AuthContext);
 
@@ -68,14 +68,13 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const getPosts = async() => {
+    const getPosts = async () => {
       const data = await getDocs(postsCollectionRef);
       setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }
+    };
 
     getPosts();
-
-  }, [])
+  }, []);
 
   return (
     <div>
@@ -88,7 +87,15 @@ function App() {
 
         <Route path="/register" element={<Register setCards={setCards} />} />
 
-        <Route path="/blog" element={<Blog featuredPosts={featuredPosts} setFeaturedPosts={setFeaturedPosts} />} />
+        <Route
+          path="/blog"
+          element={
+            <Blog
+              featuredPosts={featuredPosts}
+              setFeaturedPosts={setFeaturedPosts}
+            />
+          }
+        />
 
         <Route
           path="/messages"
@@ -111,10 +118,12 @@ function App() {
           }
         />
 
-        <Route path="/details/:id" element={<DetailsPost />} />
+        <Route
+          path="/blog/post-details/:id"
+          element={<DetailsPost setFeaturedPosts={setFeaturedPosts} />}
+        />
 
         <Route path="edit/:uid" element={<EditProfile setCards={setCards} />} />
-       
       </Routes>
     </div>
   );

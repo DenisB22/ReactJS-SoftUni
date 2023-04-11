@@ -5,13 +5,18 @@ import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
+
+
 import { DetailsPost } from "./DetailsPost";
+
+import useStyles from "../../styles";
 
 import { Link } from 'react-router-dom';
 
 function FeaturedPost(props) {
   const { post, setFeaturedPosts } = props;
+  
+  const classes = useStyles();
 
   return (
     <Grid item xs={12} md={6}>
@@ -36,6 +41,7 @@ function FeaturedPost(props) {
                 Continue reading...
               </DetailsPost> */}
               <Link to={`post-details/${post.id}`}>Continue reading...</Link>
+              
             </Typography>
           </CardContent>
           {/* <CardMedia
