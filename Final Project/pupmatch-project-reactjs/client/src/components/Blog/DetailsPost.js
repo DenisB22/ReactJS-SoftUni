@@ -114,7 +114,7 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
               <>
                 <Button
                     variant="outlined">
-                    <Link to="/edit-post" className={classes.editPostLink}>
+                    <Link to={`/edit-post/${id}`} className={classes.editPostLink}>
                         Edit Post
                     </Link>
                 </Button>

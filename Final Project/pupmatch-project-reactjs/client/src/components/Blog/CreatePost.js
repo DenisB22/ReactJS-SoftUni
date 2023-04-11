@@ -10,8 +10,6 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 
 import useStyles from "../../styles";
 
@@ -23,8 +21,7 @@ import { useState, useEffect, useContext } from "react";
 import { v4 as uuid } from "uuid";
 import { format } from 'date-fns';
 
-import { signOut } from "firebase/auth";
-import { auth } from "../../firebase";
+
 import { db } from "../../firebase";
 import {
   collection,

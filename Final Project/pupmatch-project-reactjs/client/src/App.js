@@ -125,8 +125,8 @@ function App() {
         />
 
         <Route
-          path="/edit-post"
-          element={<EditPost />}
+          path="/edit-post/:id"
+          element={<EditPost setFeaturedPosts={setFeaturedPosts} />}
         />
 
         <Route path="edit/:uid" element={<EditProfile setCards={setCards} />} />
