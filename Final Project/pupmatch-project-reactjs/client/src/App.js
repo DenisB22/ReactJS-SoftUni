@@ -17,13 +17,18 @@ import { collection, getDocs } from "firebase/firestore";
 
 import "./components/Chat/style.scss";
 import { CreatePost } from "./components/Blog/CreatePost";
+import { DetailsPost } from "./components/Blog/DetailsPost";
 
 function App() {
   const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
   const [card, setCard] = useState({});
   const [clearChat, setClearChat] = useState(false);
 
+  const [featuredPosts, setFeaturedPosts] = useState([]);
+
   const usersCollectionRef = collection(db, "users");
+
+  const postsCollectionRef = collection(db, 'blogPosts');
 
   const { currentUser } = useContext(AuthContext);
 
@@ -62,6 +67,16 @@ function App() {
     getUsers();
   }, []);
 
+  useEffect(() => {
+    const getPosts = async() => {
+      const data = await getDocs(postsCollectionRef);
+      setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
+
+    getPosts();
+
+  }, [])
+
   return (
     <div>
       <Routes>
@@ -73,7 +88,7 @@ function App() {
 
         <Route path="/register" element={<Register setCards={setCards} />} />
 
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog" element={<Blog featuredPosts={featuredPosts} setFeaturedPosts={setFeaturedPosts} />} />
 
         <Route
           path="/messages"
@@ -95,6 +110,8 @@ function App() {
             <Details setCards={setCards} sendData={getCardFromDetails} />
           }
         />
+
+        <Route path="/details/:id" element={<DetailsPost />} />
 
         <Route path="edit/:uid" element={<EditProfile setCards={setCards} />} />
        

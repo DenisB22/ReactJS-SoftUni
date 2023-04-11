@@ -89,24 +89,24 @@ const sidebar = {
 
 const theme = createTheme();
 
-export default function Blog() {
-  const [featuredPosts, setFeaturedPosts] = useState([]);
+export default function Blog({
+  featuredPosts,
+  setFeaturedPosts
+}) {
+  // const [featuredPosts, setFeaturedPosts] = useState([]);
 
-  const postsCollectionRef = collection(db, 'blogPosts');
-  console.log(postsCollectionRef);
+  // const postsCollectionRef = collection(db, 'blogPosts');
+  // console.log(postsCollectionRef);
 
-  useEffect(() => {
-    const getPosts = async() => {
-      const data = await getDocs(postsCollectionRef);
-      console.log(data.docs);
+  // useEffect(() => {
+  //   const getPosts = async() => {
+  //     const data = await getDocs(postsCollectionRef);
+  //     setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  //   }
 
-      setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-      console.log(typeof featuredPosts);
-    }
+  //   getPosts();
 
-    getPosts();
-
-  }, [])
+  // }, [])
 
   return (
     <ThemeProvider theme={theme}>
@@ -117,7 +117,7 @@ export default function Blog() {
           <MainFeaturedPost post={mainFeaturedPost} />
           <Grid container spacing={4}>
             {featuredPosts.map((post) => (
-              <FeaturedPost key={post.title} post={post} />
+              <FeaturedPost key={post.title} post={post} setFeaturedPosts={setFeaturedPosts} />
             ))}
             
           </Grid>
