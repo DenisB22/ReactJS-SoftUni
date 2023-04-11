@@ -18,6 +18,7 @@ import { collection, getDocs } from "firebase/firestore";
 import "./components/Chat/style.scss";
 import { CreatePost } from "./components/Blog/CreatePost";
 import { DetailsPost } from "./components/Blog/DetailsPost";
+import { EditPost } from "./components/Blog/EditPost";
 
 function App() {
   const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
@@ -121,6 +122,11 @@ function App() {
         <Route
           path="/blog/post-details/:id"
           element={<DetailsPost setFeaturedPosts={setFeaturedPosts} />}
+        />
+
+        <Route
+          path="/edit-post"
+          element={<EditPost />}
         />
 
         <Route path="edit/:uid" element={<EditProfile setCards={setCards} />} />

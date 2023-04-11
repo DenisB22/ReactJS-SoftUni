@@ -111,22 +111,25 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
           </CardContent>
           <CardActions>
             {currentUser && currentUser.uid === post.creator && (
-              <Button
-                variant="outlined"
-                color="error"
-                onClick={() => deletePost(id)}
-              >
-                Delete Post
-              </Button>
+              <>
+                <Button
+                    variant="outlined">
+                    <Link to="/edit-post" className={classes.editPostLink}>
+                        Edit Post
+                    </Link>
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => deletePost(id)}
+                >
+                  Delete Post
+                </Button>
+              </>
             )}
             {currentUser && currentUser.uid !== post.creator && (
-                <Button
-                    variant="outlined"
-                >
-                Like
-                </Button>
+              <Button variant="outlined">Like</Button>
             )}
-            
           </CardActions>
         </Card>
       </Container>

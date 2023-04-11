@@ -34,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'white',
     },
+    blogLink: {
+        textDecoration: 'none',
+        color: 'white',
+    },
     homeLinkBlog: {
         textDecoration: 'none',
         color: '#5f92d8',
@@ -43,6 +47,10 @@ const useStyles = makeStyles((theme) => ({
         color: '#1976d2',
     },
     editLink: {
+        textDecoration: 'none',
+        color: '#1976d2',
+    },
+    editPostLink: {
         textDecoration: 'none',
         color: '#1976d2',
     },

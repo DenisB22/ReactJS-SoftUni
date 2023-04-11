@@ -21,6 +21,13 @@ export const Header = () => {
                 </Link>
             </Typography>
         </Button>
+        <Button href="" variant="string">
+            <Typography variant="h6" color="inherit" noWrap>
+                <Link to="/blog" className={classes.blogLink}>
+                  Blog
+                </Link>
+            </Typography>
+        </Button>
       </Toolbar>
     </AppBar>
   );
