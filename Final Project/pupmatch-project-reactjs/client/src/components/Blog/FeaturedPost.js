@@ -9,20 +9,20 @@ import CardMedia from '@mui/material/CardMedia';
 
 function FeaturedPost(props) {
   const { post } = props;
-
+  
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component="a" href="#">
         <Card sx={{ display: 'flex' }}>
           <CardContent sx={{ flex: 1 }}>
             <Typography component="h2" variant="h5">
-              {post.title}
+              { post && post.title }
             </Typography>
             <Typography variant="subtitle1" color="text.secondary">
-              {post.date}
+              { post && post.date }
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.content}
+              { post && post.content.split(" ").slice(0, Math.ceil((post.content.split(' ').length) / 2)).join(' ') }...
             </Typography>
             <Typography variant="subtitle1" color="primary">
               Continue reading...
