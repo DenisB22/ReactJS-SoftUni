@@ -26,9 +26,17 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: '#1976d2',
     },
+    createPostLink: {
+        textDecoration: 'none',
+        color: '#1976d2',
+    },
     homeLink: {
         textDecoration: 'none',
         color: 'white',
+    },
+    homeLinkBlog: {
+        textDecoration: 'none',
+        color: '#5f92d8',
     },
     detailsLink: {
         textDecoration: 'none',

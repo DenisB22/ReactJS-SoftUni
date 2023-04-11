@@ -30,12 +30,12 @@ const sections = [
 ];
 
 const mainFeaturedPost = {
-  title: 'Title of a longer featured blog post',
+  title: 'Pupmatch Blog',
   description:
-    "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-  image: 'https://source.unsplash.com/random',
+    "Welcome to our Pupmatch Blog! Share your amazing stories, hilarious experiences, and heartwarming moments with your furry best friend. Join our community of dog lovers and discover the joys of being a dog parent. Let's bark together and spread the love for our four-legged companions!",
+  image: 'https://source.unsplash.com/random/?Dog',
   imageText: 'main image description',
-  linkText: 'Continue reading…',
+  linkText: 'Create Post',
 };
 
 const featuredPosts = [
@@ -100,6 +100,7 @@ export default function Blog() {
           </Grid>
           <Grid container spacing={5} sx={{ mt: 3 }}>
             <Main title="From the firehose" posts={posts} />
+            {/* <Main title="From the firehose" /> */}
             <Sidebar
               title={sidebar.title}
               description={sidebar.description}
@@ -111,7 +112,7 @@ export default function Blog() {
       </Container>
       <Footer
         title="Footer"
-        description="Something here to give the footer a purpose!"
+        description="Pupmatch - Connecting dogs and their humans."
       />
     </ThemeProvider>
   );

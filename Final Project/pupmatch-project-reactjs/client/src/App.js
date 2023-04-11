@@ -16,6 +16,7 @@ import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 import "./components/Chat/style.scss";
+import { CreatePost } from "./components/Blog/CreatePost";
 
 function App() {
   const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
@@ -85,6 +86,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="create-post" element={<CreatePost />} />
 
         <Route
           path="/details/:uid"
