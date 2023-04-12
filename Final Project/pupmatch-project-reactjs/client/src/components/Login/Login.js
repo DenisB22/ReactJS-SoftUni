@@ -18,13 +18,18 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebase';
+import { auth, db } from '../../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 
 const theme = createTheme();
 
 export const Login = () => {
-  const [err, setErr] = useState(false);
+  // const [err, setErr] = useState(false);
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -37,11 +42,44 @@ export const Login = () => {
     const email = data.get("email");
     const password = data.get("password");
 
+    if (!email) {
+      setEmailError('Please enter an email!');
+      return;
+      
+    } else {
+      setEmailError('');
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      setEmailError('Please enter a valid email!');
+      return;
+    } else {
+      setEmailError('');
+    }
+
+    const usersRef = collection(db, "users");
+   
+    const queryEmail = query(usersRef, where('email', '==', email));
+    const snapshot = await getDocs(queryEmail);
+    console.log(snapshot);
+    console.log(snapshot.size);
+    const emailExists = snapshot.size >= 1;
+    if (!emailExists) {
+      console.log(email);
+      setEmailError('Email does not exist!');
+      return;
+    } else {
+      setEmailError('');
+    }
+
     try {
       await signInWithEmailAndPassword(auth, email, password);
       navigate('/');
     } catch(err) {
-      setErr(true);
+      // setErr(true);
+      setPasswordError('Invalid Password!');
     }
 
   };
@@ -91,6 +129,8 @@ export const Login = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                helperText={emailError}
+                error={Boolean(emailError)}
               />
               <TextField
                 margin="normal"
@@ -101,6 +141,8 @@ export const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                helperText={passwordError}
+                error={Boolean(passwordError)}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
@@ -138,7 +180,8 @@ export const Login = () => {
               
               <Footer />
             </Box>
-            {err && <span>Something went wrong</span>}
+            {/* {err && <span>Something went wrong</span>} */}
+
           </Box>
         </Grid>
       </Grid>
