@@ -86,15 +86,6 @@ export const CreatePost = () => {
         });
       }
 
-      // await updateDoc(doc(db, "blogPosts", currentUserUid), {
-      //   posts: arrayUnion({
-      //     id: uuid(),
-      //     title,
-      //     content,
-      //     // date: serverTimestamp()
-      //     date: Timestamp.now(),
-      //   }),
-      // });
 
       navigate('/blog');
     } catch (err) {
