@@ -130,12 +130,10 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
                 </Button>
               </>
             )}
-            {currentUser && currentUser.uid !== post.creator && (
-              
-                
+            {currentUser && currentUser.uid !== post.creator && ( 
               <LikeButton postId={id} userId={currentUser.uid} />
-              
             )}
+            
           </CardActions>
         </Card>
       </Container>
