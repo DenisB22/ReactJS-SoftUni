@@ -32,7 +32,7 @@ import { Link } from "react-router-dom";
 const theme = createTheme();
 
 export const Register = ({ setCards }) => {
-  const [err, setErr] = useState(false);
+  // const [err, setErr] = useState(false);
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
@@ -48,20 +48,20 @@ export const Register = ({ setCards }) => {
   const [passwordError, setPasswordError] = useState("");
   const [additionalInfoError, setAdditionalInfoError] = useState("");
 
-  const validateEmail = async (email) => {
-    const usersRef = collection(db, "users");
-    const snapshot = await getDocs(usersRef);
-    const users = snapshot.docs.map((doc) => doc.data());
-    const emailExists = users.some((user) => user.email === email);
+  // const validateEmail = async (email) => {
+  //   const usersRef = collection(db, "users");
+  //   const snapshot = await getDocs(usersRef);
+  //   const users = snapshot.docs.map((doc) => doc.data());
+  //   const emailExists = users.some((user) => user.email === email);
 
-    if (emailExists) {
-      setEmailError("This email is already in use");
-      console.log("This email is already in use");
-    } else {
-      setEmailError("");
-      setEmail(email);
-    }
-  };
+  //   if (emailExists) {
+  //     setEmailError("This email is already in use");
+  //     console.log("This email is already in use");
+  //   } else {
+  //     setEmailError("");
+  //     setEmail(email);
+  //   }
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -162,11 +162,11 @@ export const Register = ({ setCards }) => {
     if (!breed) {
       setBreedError("Please enter breed!");
     } else if (breed.length < 2 || breed.length > 50) {
-      setCityError("Breed name must be between 2 and 50 characters!");
-    } else if (!/^[A-Za-z]+$/.test(breed)) {
-      setCityError("Please enter a valid breed name!");
+      setBreedError("Breed name must be between 2 and 50 characters!");
+    } else if (!/^[A-Za-z ]+$/.test(breed)) {
+      setBreedError("Please enter a valid breed name!");
     } else {
-      setCityError("");
+      setBreedError("");
     }
 
     if (!file) {
@@ -183,18 +183,19 @@ export const Register = ({ setCards }) => {
       setEmailError("Please enter a valid email!");
     } else {
       // validateEmail(email);
-      const usersRef = collection(db, "users");
-      const snapshot = await getDocs(usersRef);
-      const users = snapshot.docs.map((doc) => doc.data());
-      const emailExists = users.some((user) => user.email === email);
+      // const usersRef = collection(db, "users");
+      // const snapshot = await getDocs(usersRef);
+      // const users = snapshot.docs.map((doc) => doc.data());
+      // const emailExists = users.some((user) => user.email === email);
 
-      if (emailExists) {
-        setEmailError("This email is already in use");
-        console.log("This email is already in use");
-      } else {
-        setEmailError("");
-        setEmail(email);
-      }
+      // if (emailExists) {
+      //   setEmailError("This email is already in use");
+      //   console.log("This email is already in use");
+      // } else {
+      //   setEmailError("");
+      //   setEmail(email);
+      // }
+      setEmailError('');
     }
 
     if (!password) {
@@ -233,7 +234,7 @@ export const Register = ({ setCards }) => {
       uploadTask.on(
         (error) => {
           // Handle unsuccessful uploads
-          setErr(true);
+          // setErr(true);
         },
         () => {
           // Handle successful uploads on complete
@@ -278,7 +279,8 @@ export const Register = ({ setCards }) => {
         }
       );
     } catch (err) {
-      setErr(true);
+      // setErr(true);
+      setEmailError("This email is already in use");
     }
   };
 
@@ -494,7 +496,7 @@ export const Register = ({ setCards }) => {
               </Grid>
             </Grid>
           </Box>
-          {err && <span>Something went wrong</span>}
+          {/* {err && <span>Something went wrong</span>} */}
         </Box>
         <Footer />
       </Container>
