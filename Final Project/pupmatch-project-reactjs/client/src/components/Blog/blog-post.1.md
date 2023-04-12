@@ -1,46 +1,25 @@
-# Sample blog post
+# 5 Tips for Successfully Training Your New Puppy
+1. Choose a Training Method
+2. Decide on a Training Schedule
+3. Set a Training Frequency
+4. Basic Commands
+5. Set Boundaries and Rules
 
-_April 1, 2020 by [Olivier](/)_
+Congratulations on the arrival of your new furry friend! Bringing a puppy into your home is a big responsibility, but it's also an incredibly rewarding experience. One of the first things you'll want to do is start training your new pup, and it's important to do so early on to set the stage for a well-behaved dog in the future. But where do you start?
 
-This blog post shows a few different types of content that are supported and styled with
-Material styles. Basic typography, images, and code are all supported.
-You can extend these by modifying `Markdown.js`.
+## Choose a Training Method
+First things first, choose a training method that aligns with your values and goals. There are many different approaches to training, from positive reinforcement to more punishment-based methods. Consider what you want to achieve with your training and choose a method that feels comfortable and effective for you.
 
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.
-Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+## Decide on a Training Schedule
+Next, decide on a training schedule. Puppies have short attention spans, so it's best to keep training sessions short and sweet.
 
-Curabitur blandit tempus porttitor. **Nullam quis risus eget urna mollis** ornare vel eu leo.
-Nullam id dolor id nibh ultricies vehicula ut id elit.
+## Set a Training Frequency
+Start with five to ten minute sessions several times a day, and gradually increase the length as your puppy gets older. Keep in mind that puppies have a lot of energy, so it's important to provide plenty of physical and mental stimulation through play, walks, and training
 
-Etiam porta sem malesuada magna mollis euismod. Cras mattis consectetur purus sit amet fermentum.
-Aenean lacinia bibendum nulla sed consectetur.
+## Basic Commands
+Now it's time to choose some basic commands to work on. "Sit," "stay," and "come" are great starters, as they can be useful in a variety of situations. Start with one command at a time, and use treats and praise to reinforce good behavior. As your puppy starts to understand the commands, gradually fade out the treats and rely more on praise.
 
-## Heading
+## Set Boundaries and Rules
+It's also important to set boundaries and rules for your puppy from the start. Decide on a designated spot for your puppy to relieve themselves, and establish rules for where they are and aren't allowed to go in the house. Consistency is key, so make sure everyone in the household is on the same page when it comes to enforcing the rules.
 
-Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.
-Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-
-### Sub-heading 1
-
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-
-### Sub-heading 2
-
-Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-Aenean lacinia bibendum nulla sed consectetur. Etiam porta sem malesuada magna mollis euismod.
-Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo
-sit amet risus.
-
-- Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-- Donec id elit non mi porta gravida at eget metus.
-- Nulla vitae elit libero, a pharetra augue.
-
-Donec ullamcorper nulla non metus auctor fringilla. Nulla vitae elit libero, a pharetra augue.
-
-1. Vestibulum id ligula porta felis euismod semper.
-1. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-1. Maecenas sed diam eget risus varius blandit sit amet non magna.
-
-Cras mattis consectetur purus sit amet fermentum. Sed posuere consectetur est at lobortis.
+Training your new puppy can be a lot of work, but it's also a lot of fun! Just be patient, stay consistent, and above all, have a good sense of humor. After all, puppies are bound to get into a bit of mischief now and then. Happy training!

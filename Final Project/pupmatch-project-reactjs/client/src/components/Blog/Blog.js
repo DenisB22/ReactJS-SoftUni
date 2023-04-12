@@ -13,6 +13,7 @@ import Main from './Main';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import post1 from './blog-post.1.md';
+
 import post2 from './blog-post.2.md';
 import post3 from './blog-post.3.md';
 
@@ -61,7 +62,9 @@ const mainFeaturedPost = {
 //   },
 // ];
 
-const posts = [post1, post2, post3];
+// const posts = [post1, post2, post3];
+const posts = [post1];
+console.log(post1);
 
 const sidebar = {
   title: 'About',
