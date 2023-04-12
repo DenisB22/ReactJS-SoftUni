@@ -200,12 +200,15 @@ export const Register = ({ setCards }) => {
 
     if (!password) {
       setPasswordError("Please enter a password!");
+      return;
     } else if (password.length < 8 || password.length > 32) {
       setPasswordError("Password must be between 8 and 32 characters!");
+      return;
     } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
       setPasswordError(
         "Password must contain at least one letter and one number!"
       );
+      return;
     } else {
       setPasswordError("");
     }

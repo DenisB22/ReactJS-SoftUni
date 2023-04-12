@@ -30,6 +30,7 @@ import {
   where,
 } from "firebase/firestore";
 import { Searchbar } from "../Chat/Searchbar";
+import { LikeButton } from "./LikeButton";
 
 export const DetailsPost = ({ setFeaturedPosts }) => {
   const [post, setPost] = useState({});
@@ -112,11 +113,13 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
           <CardActions>
             {currentUser && currentUser.uid === post.creator && (
               <>
-                <Button
-                    variant="outlined">
-                    <Link to={`/edit-post/${id}`} className={classes.editPostLink}>
-                        Edit Post
-                    </Link>
+                <Button variant="outlined">
+                  <Link
+                    to={`/edit-post/${id}`}
+                    className={classes.editPostLink}
+                  >
+                    Edit Post
+                  </Link>
                 </Button>
                 <Button
                   variant="outlined"
@@ -128,7 +131,10 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
               </>
             )}
             {currentUser && currentUser.uid !== post.creator && (
-              <Button variant="outlined">Like</Button>
+              <>
+                <Button variant="outlined">Like</Button>
+                <LikeButton postId={id} userId={currentUser.uid} />
+              </>
             )}
           </CardActions>
         </Card>
