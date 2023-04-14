@@ -318,14 +318,7 @@ export const EditProfile = ({
             >
               Edit
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                {/* <Link href="/login" variant="body2">
-                  Already have an account? Login
-                </Link> */}
-                <Link to="/login">Already have an account? Login</Link>
-              </Grid>
-            </Grid>
+            
           </Box>
           {err && <span>Something went wrong</span>}
         </Box>
