@@ -35,11 +35,24 @@ function App() {
 
   // console.log(currentUser);
 
-  const ProtectedRoute = ({ children }) => {
+  const ProtectedRouteChat = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/" />;
     }
+    return children;
+  };
 
+  const ProtectedRouteLogin = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to="/" />;
+    }
+    return children;
+  };
+
+  const ProtectedRouteRegister = ({ children }) => {
+    if (currentUser) {
+      return <Navigate to="/" />;
+    }
     return children;
   };
 
@@ -84,9 +97,19 @@ function App() {
           path="/"
           element={<Home cards={cards} currentUser={currentUser} />}
         />
-        <Route path="/login" element={<Login />} />
 
-        <Route path="/register" element={<Register setCards={setCards} />} />
+        <Route path="/login" element={
+          <ProtectedRouteLogin>
+            <Login />
+          </ProtectedRouteLogin>
+        } />
+        {/* <Route path="/login" element={<Login />} /> */}
+
+        <Route path="/register" element={
+          <ProtectedRouteRegister>
+            <Register setCards={setCards} />
+          </ProtectedRouteRegister>
+        } />
 
         <Route
           path="/blog"
@@ -101,13 +124,13 @@ function App() {
         <Route
           path="/messages"
           element={
-            <ProtectedRoute>
+            <ProtectedRouteChat>
               <ChatBox
                 card={card}
                 clearChat={clearChat}
                 updateClearChatState={updateClearChatState}
               />
-            </ProtectedRoute>
+            </ProtectedRouteChat>
           }
         />
         <Route path="create-post" element={<CreatePost />} />
