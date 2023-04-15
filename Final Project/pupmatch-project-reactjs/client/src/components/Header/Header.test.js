@@ -1,9 +1,27 @@
-import { render, screen } from '@testing-library/react';
-import { Header } from './Header';
+import React from "react";
+import { render, screen } from "@testing-library/react";
+import { MemoryRouter } from "react-router-dom";
+import { Header } from "./Header";
 
-test('renders the app name', () => {
-  render(<Header />);
-  const appNameLink = screen.getByText(/pupmatch/i);
-  expect(appNameLink).toBeInTheDocument();
-  expect(appNameLink).toHaveAttribute('href', '/');
+describe("Header", () => {
+
+  it("should render a link to the home page", () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
+    const homeLink = screen.getByRole("link", { name: /pupmatch/i });
+    expect(homeLink).toHaveAttribute("href", "/");
+  });
+
+  it("should render a link to the blog page", () => {
+    render(
+      <MemoryRouter>
+        <Header />
+      </MemoryRouter>
+    );
+    const blogLink = screen.getByRole("link", { name: /blog/i });
+    expect(blogLink).toHaveAttribute("href", "/blog");
+  });
 });
