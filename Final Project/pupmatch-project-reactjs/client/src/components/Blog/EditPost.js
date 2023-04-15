@@ -41,17 +41,28 @@ import {
 
 import Header from "./Header";
 
-export const EditPost = ({ 
-    setFeaturedPosts,
-    
-}) => {
-  const { currentUser } = useContext(AuthContext);
+export const EditPost = ({ setFeaturedPosts }) => {
+  const [post, setPost] = useState({ title: "", content: "" });
 
-    const { id } = useParams();
+  const { id } = useParams();
 
   const classes = useStyles();
   const navigate = useNavigate();
   console.log(id);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const postDoc = await getDoc(doc(db, "blogPosts", id));
+      if (postDoc.exists()) {
+        const postData = postDoc.data();
+        setPost(postData);
+      } else {
+        console.log("No such document!");
+      }
+    };
+
+    fetchPost();
+  }, [id]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -88,6 +99,7 @@ export const EditPost = ({
     }
   };
 
+
   return (
     <>
       <Header title="" sections={[{ title: "", url: "#" }]} />
@@ -119,9 +131,11 @@ export const EditPost = ({
                   required
                   fullWidth
                   id="title"
-                  label="Post's Title"
+                  // label="Post's Title"
                   name="title"
                   autoComplete="title"
+                  value={post.title}
+                  onChange={(e) => setPost({ ...post, title: e.target.value })}
                 />
               </Grid>
 
@@ -130,11 +144,13 @@ export const EditPost = ({
                   id="outlined-multiline-static"
                   required
                   fullWidth
-                  label="Post's Content"
+                  // label="Post's Content"
                   name="postContent"
                   type="content"
                   multiline
                   rows={4}
+                  value={post.content}
+                  onChange={(e) => setPost({...post, content: e.target.content})}
                 />
               </Grid>
             </Grid>
