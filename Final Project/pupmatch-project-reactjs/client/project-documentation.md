@@ -61,9 +61,9 @@ By using these technologies, I was able to build a modern and dynamic web applic
 2. Footer Component 
     - This component is responsible for rendering the footer of the application.
 3. Home Component 
-    - This component is responsible for rendering a list of all users in the application. It receives a list of users as props and passes each user to the DogItem component for rendering. Each user is displayed as a card with their name, profile picture, breed and a "View" button. The "View" button redirects the user to the Details component where they can view more information about the selected user.
+    - This component is responsible for rendering a list of all users in the application. It receives a list of users as props and passes each user to the DogItem component for rendering. Each user is displayed as a card with their name, profile picture, breed and a "View" button. The "View" button redirects the user to the Details component where they can view more information about the selected user. If the profile is the logged in user's profile, there is also an "Edit" button, which redirects the user to the edit page.
 4. DogItem Component 
-    - This component receives the users as props, loops through them  and renders their name, profile picture, and a "View" button. The "View" button redirects the user to the Details component.
+    - This component receives the users as props, loops through them  and renders their name, profile picture, and a "View" button. The "View" button redirects the user to the Details component.If the profile is the logged in user's profile, there is also an "Edit" button, which redirects the user to the edit page.
 5. Login Component 
     - This component is responsible for rendering the login form. It includes input fields for the user's email and password and a "Login" button that submits the form to Firebase for authentication.
 6. Register Component 
@@ -83,15 +83,15 @@ By using these technologies, I was able to build a modern and dynamic web applic
 13. ChatBox Component 
     - This is the main component that renders the Sidebar and Chat components. It manages the state for the current user and the user with whom they are chatting. 
 14. Sidebar Component 
-    - This component renders the Navbar, Searchbar, and Chats Components. The Navbar displays information about the current user, such as their photo and first name, and includes a Home button that redirects to the Home Component. The Searchbar handles searching for other users and adding them to the chats collection. The Chats component displays a list of all the current chats and shows the last message between the current user and each user they are chatting with.
+    - This component renders the Navbar, Searchbar, and Chats Components. The Navbar displays information about the current user, such as their photo and first name, and includes a Home button that redirects to the Home Component.
 15. Navbar Component 
     - This component displays the photo and first name of the current user, and includes a Home button that redirects to the Home Component.
 16. Searchbar.js 
     - This component handles searching for other users and adding them to the chats collection. When the user enters the name of another user, the component searches the Firebase database for that user and displays their photo and name.
 17. Chats.js 
-    - This component displays a list of all the current chats and shows the last message between the current user and each user they are chatting with. It retrieves this information from the Firebase database.
+    - This component shows the last message between the current user and each user they are chatting with. It retrieves this information from the Firebase database.
 18. Chat.js 
-    - This component displays the name of the user the current user is chatting with. It includes the Messages.js and InputMessage.js components.
+    - This component displays the name of the user the current user is chatting with. It includes the Messages and InputMessage components.
 19. Messages.js 
     - This component displays all the messages between the current user and the user they are chatting with. It retrieves this information from the Firebase database and displays each message in the form of a Message Component.
 20. Message.js 
