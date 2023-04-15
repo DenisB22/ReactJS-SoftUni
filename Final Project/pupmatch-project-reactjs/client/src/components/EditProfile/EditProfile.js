@@ -12,13 +12,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Footer } from "../Footer/Footer";
 import { createUserWithEmailAndPassword, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { auth, db, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import {  collection, doc, getDocs, updateDoc } from "firebase/firestore";
+import {  collection, doc, getDoc, getDocs, updateDoc } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import  { Link } from 'react-router-dom';
 
@@ -28,8 +28,37 @@ export const EditProfile = ({
   setCards,
 }) => {
   const [err, setErr] = useState(false);
+  const [profile, setProfile] = useState({ 
+    firstName: '', 
+    lastName: '', 
+    city: '', 
+    country: '', 
+    gender: '',
+    age: '',
+    breed: '',
+    imageUrl: '',
+    email: '',
+    password: '',
+    additionalInfo: '',
+   })
+
   const navigate = useNavigate();
   const { uid } = useParams();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const postDoc = await getDoc(doc(db, "users", uid));
+      if (postDoc.exists()) {
+        const profileData = postDoc.data();
+        console.log(profileData);
+        setProfile(profileData);
+      } else {
+        console.log("No such user!");
+      }
+    };
+
+    fetchProfile();
+  }, [uid]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -162,7 +191,9 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="firstName"
-                  label="Puppy's First Name"
+                  // label="Puppy's First Name"
+                  value={profile.firstName}
+                  onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
                   autoFocus
                 />
               </Grid>
@@ -171,7 +202,9 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="lastName"
-                  label="Puppy's Last Name"
+                  // label="Puppy's Last Name"
+                  value={profile.lastName}
+                  onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
                   name="lastName"
                   autoComplete="family-name"
                 />
@@ -183,7 +216,9 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="city"
-                  label="Puppy's City"
+                  // label="Puppy's City"
+                  value={profile.city}
+                  onChange={(e) => setProfile({ ...profile, city: e.target.value })}
                   autoFocus
                 />
               </Grid>
@@ -192,8 +227,10 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="country"
-                  label="Puppy's Country"
+                  // label="Puppy's Country"
                   name="country"
+                  value={profile.country}
+                  onChange={(e) => setProfile({ ...profile, country: e.target.value })}
                   autoComplete="country"
                 />
               </Grid>
@@ -202,8 +239,10 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="gender"
-                  label="Puppy's Gender"
+                  // label="Puppy's Gender"
                   name="gender"
+                  value={profile.gender}
+                  onChange={(e) => setProfile({ ...profile, gender: e.target.value })}
                   autoComplete="gender"
                 />
               </Grid>
@@ -212,7 +251,9 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="age"
-                  label="Puppy's Age"
+                  // label="Puppy's Age"
+                  value={profile.age}
+                  onChange={(e) => setProfile({ ...profile, age: e.target.value })}
                   name="age"
                   autoComplete="age"
                 />
@@ -222,8 +263,10 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="breed"
-                  label="Puppy's Breed"
+                  // label="Puppy's Breed"
                   name="breed"
+                  value={profile.breed}
+                  onChange={(e) => setProfile({ ...profile, breed: e.target.value })}
                   autoComplete="breed"
                 />
               </Grid>
@@ -232,9 +275,11 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="image"
-                  label="Puppy's Image"
+                  // label="Puppy's Image"
                   name="image"
                   autoComplete="image"
+                  value={profile.imageUrl}
+                  onChange={(e) => setProfile({ ...profile, imageUrl: e.target.value })}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -272,8 +317,10 @@ export const EditProfile = ({
                   required
                   fullWidth
                   id="email"
-                  label="Email Address"
+                  // label="Email Address"
                   name="email"
+                  value={profile.email}
+                  onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                   autoComplete="email"
                 />
               </Grid>
@@ -282,9 +329,11 @@ export const EditProfile = ({
                   required
                   fullWidth
                   name="password"
-                  label="Password"
+                  // label="Password"
                   type="password"
                   id="password"
+                  value={profile.password}
+                  onChange={(e) => setProfile({ ...profile, password: e.target.value })}
                   autoComplete="new-password"
                 />
               </Grid>
@@ -293,7 +342,9 @@ export const EditProfile = ({
                   id="outlined-multiline-static"
                   required
                   fullWidth
-                  label="Additional Info"
+                  // label="Additional Info"
+                  value={profile.additionalInfo}
+                  onChange={(e) => setProfile({ ...profile, additionalInfo: e.target.value })}
                   name="additionalInfo"
                   
                   type="info"
