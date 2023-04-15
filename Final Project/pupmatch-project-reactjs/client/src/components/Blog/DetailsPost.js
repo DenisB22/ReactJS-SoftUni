@@ -28,13 +28,16 @@ import {
   getDocs,
   query,
   where,
+  onSnapshot,
+  getDoc,
 } from "firebase/firestore";
 import { Searchbar } from "../Chat/Searchbar";
 import { LikeButton } from "./LikeButton";
 
 export const DetailsPost = ({ setFeaturedPosts }) => {
   const [post, setPost] = useState({});
-  const [author, setAuthor] = useState({}); // Storing the data of a single doc
+  const [likes, setLikes] = useState(0);
+  const [author, setAuthor] = useState({});// Storing the data of a single doc
   const { id } = useParams();
 
   const { currentUser } = useContext(AuthContext);
@@ -51,6 +54,11 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
     navigate("/blog");
   };
 
+  const handleLikesChange = (newLikes) => {
+    setLikes(newLikes);
+  };
+
+
   useEffect(() => {
     const getPost = async () => {
       // console.log("works");
@@ -66,7 +74,9 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
       // console.log(card);
     };
     getPost();
+
   }, [id]);
+
 
   useEffect(() => {
     const getAuthor = async () => {
@@ -76,16 +86,33 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
         collection(db, "users"),
         where("uid", "==", post.creator)
       );
+      
       const querySnapshot = await getDocs(q);
+      
       querySnapshot.forEach((doc) => {
         // console.log(doc.data());
-
         setAuthor(doc.data());
       });
       // console.log(card);
     };
     getAuthor();
   }, [id]);
+
+  useEffect(() => {
+    const getLikesCount = async (postId) => {
+      const postRef = doc(db, "blogPosts", postId);
+      const postDoc = await getDoc(postRef);
+      if (postDoc.exists()) {
+        const postData = postDoc.data();
+        if (postData.likes) {
+          setLikes(postData.likes.length);
+        }
+      }
+    };
+    if (id) {
+      getLikesCount(id);
+    }
+  }, [likes]);
 
   return (
     <>
@@ -109,6 +136,10 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
             <Typography variant="body2" color="text.secondary">
               {post.content}
             </Typography>
+            
+            {likes > 0 && <Typography>
+                  Likes: {likes}
+            </Typography>}
           </CardContent>
           <CardActions>
             {currentUser && currentUser.uid === post.creator && (
@@ -131,7 +162,7 @@ export const DetailsPost = ({ setFeaturedPosts }) => {
               </>
             )}
             {currentUser && currentUser.uid !== post.creator && ( 
-              <LikeButton postId={id} userId={currentUser.uid} />
+              <LikeButton postId={id} userId={currentUser.uid} onLikesChange={handleLikesChange} />
             )}
             
           </CardActions>
