@@ -524,7 +524,7 @@ export const Register = ({ setCards }) => {
               },
             ]);
 
-            
+            await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
           });
         }

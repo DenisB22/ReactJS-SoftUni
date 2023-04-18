@@ -13,7 +13,6 @@ import useStyles from "../../styles";
 
 import { Header } from "../Header/Header";
 import { AuthContext } from "../../context/AuthContext";
-// import  AuthContext  from "../../context/AuthContext";
 
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
@@ -41,18 +40,20 @@ export const Details = ({ setCards, sendData }) => {
   const navigate = useNavigate();
 
   const deleteProfile = async (uid) => {
-    setCards((prevCards) => prevCards.filter((x) => x.uid !== uid));
-
-    await deleteDoc(doc(db, "users", uid));
-
     const postsQuery = query(
       collection(db, "blogPosts"),
       where("creator", "==", uid)
     );
+    // console.log(postsQuery);
     const postDocs = await getDocs(postsQuery);
     postDocs.forEach((doc) => {
       deleteDoc(doc.ref);
     });
+    
+    setCards((prevCards) => prevCards.filter((x) => x.uid !== uid));
+
+    await deleteDoc(doc(db, "users", uid));
+
     navigate("/");
     signOut(auth);
   };
