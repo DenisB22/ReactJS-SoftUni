@@ -92,22 +92,23 @@ const theme = createTheme();
 
 export default function Blog({
   featuredPosts,
-  setFeaturedPosts
+  setFeaturedPosts,
+  postsCollectionRef
 }) {
   // const [featuredPosts, setFeaturedPosts] = useState([]);
 
   // const postsCollectionRef = collection(db, 'blogPosts');
   // console.log(postsCollectionRef);
 
-  // useEffect(() => {
-  //   const getPosts = async() => {
-  //     const data = await getDocs(postsCollectionRef);
-  //     setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-  //   }
+  useEffect(() => {
+    const getPosts = async() => {
+      const data = await getDocs(postsCollectionRef);
+      setFeaturedPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    }
 
-  //   getPosts();
+    getPosts();
 
-  // }, [])
+  }, [])
 
   return (
     <ThemeProvider theme={theme}>

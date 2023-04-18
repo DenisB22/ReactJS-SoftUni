@@ -24,7 +24,6 @@ function App() {
   const [cards, setCards] = useState([]); // Storing the data when we fetch all the docs
   const [card, setCard] = useState({});
   const [clearChat, setClearChat] = useState(false);
-
   const [featuredPosts, setFeaturedPosts] = useState([]);
 
   const usersCollectionRef = collection(db, "users");
@@ -88,7 +87,7 @@ function App() {
     };
 
     getPosts();
-  }, [featuredPosts]);
+  }, []);
 
   return (
     <div>
@@ -117,6 +116,7 @@ function App() {
             <Blog
               featuredPosts={featuredPosts}
               setFeaturedPosts={setFeaturedPosts}
+              postsCollectionRef={postsCollectionRef}
             />
           }
         />
