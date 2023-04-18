@@ -50,10 +50,10 @@ export const EditProfile = ({
       const postDoc = await getDoc(doc(db, "users", uid));
       if (postDoc.exists()) {
         const profileData = postDoc.data();
-        console.log(profileData);
+        // .log(profileData);
         setProfile(profileData);
       } else {
-        console.log("No such user!");
+        // console.log("No such user!");
       }
     };
 

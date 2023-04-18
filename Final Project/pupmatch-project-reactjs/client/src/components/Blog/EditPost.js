@@ -48,7 +48,7 @@ export const EditPost = ({ setFeaturedPosts }) => {
 
   const classes = useStyles();
   const navigate = useNavigate();
-  console.log(id);
+  // console.log(id);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -57,7 +57,7 @@ export const EditPost = ({ setFeaturedPosts }) => {
         const postData = postDoc.data();
         setPost(postData);
       } else {
-        console.log("No such document!");
+        // console.log("No such document!");
       }
     };
 
@@ -66,23 +66,23 @@ export const EditPost = ({ setFeaturedPosts }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("handleSubmit");
+    // console.log("handleSubmit");
 
     const data = new FormData(event.currentTarget);
 
     const title = data.get("title");
     const content = data.get("postContent");
 
-    console.log(title);
-    console.log(content);
+    // console.log(title);
+    // console.log(content);
 
     try {
-      console.log("Hi!");
+      // console.log("Hi!");
 
       const date = Timestamp.now().toDate();
       const formattedDate = format(date, "MMMM d, yyyy");
 
-      console.log(formattedDate);
+      // console.log(formattedDate);
 
       await updateDoc(doc(db, "blogPosts", id), {
         title,

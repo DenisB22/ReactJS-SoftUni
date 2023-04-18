@@ -93,7 +93,7 @@ export const InputMessage = ({card, clearChat, updateClearChatState}) => {
   useEffect(() => {
     if (!clearChat) {
       updateClearChatState(true);
-      console.log(clearChat);
+      // console.log(clearChat);
       // console.log(Object.keys(card).length);
       // console.log(Object.keys(card));
       // console.log(card);
@@ -101,7 +101,7 @@ export const InputMessage = ({card, clearChat, updateClearChatState}) => {
         if (img) {
           const storageRef = ref(storage, uuid());
           const uploadTask = uploadBytesResumable(storageRef, img);
-          console.log(data.chatId);
+          // console.log(data.chatId);
     
           uploadTask.on(
             (error) => {

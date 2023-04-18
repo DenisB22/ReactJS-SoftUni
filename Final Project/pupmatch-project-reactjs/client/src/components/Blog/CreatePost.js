@@ -50,7 +50,7 @@ export const CreatePost = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("handleSubmit");
+    // console.log("handleSubmit");
 
     const data = new FormData(event.currentTarget);
 
@@ -59,21 +59,21 @@ export const CreatePost = () => {
 
     const postId = uuid();
 
-    console.log(title);
-    console.log(content);
+    // console.log(title);
+    // console.log(content);
 
     const currentUserUid = currentUser.uid;
 
     try {
       const res = await getDoc(doc(db, "blogPosts", postId));
-      console.log('Hi!');
+      // console.log('Hi!');
 
       if (!res.exists()) {
 
         const date = Timestamp.now().toDate();
         const formattedDate = format(date, 'MMMM d, yyyy');
-        console.log(formattedDate);
-        console.log('Hi!')
+        // console.log(formattedDate);
+        // console.log('Hi!')
 
 
         await setDoc(doc(db, "blogPosts", postId), {

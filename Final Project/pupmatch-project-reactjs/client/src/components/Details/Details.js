@@ -9,7 +9,6 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-
 import useStyles from "../../styles";
 
 import { Header } from "../Header/Header";
@@ -45,6 +44,15 @@ export const Details = ({ setCards, sendData }) => {
     setCards((prevCards) => prevCards.filter((x) => x.uid !== uid));
 
     await deleteDoc(doc(db, "users", uid));
+
+    const postsQuery = query(
+      collection(db, "blogPosts"),
+      where("creator", "==", uid)
+    );
+    const postDocs = await getDocs(postsQuery);
+    postDocs.forEach((doc) => {
+      deleteDoc(doc.ref);
+    });
     navigate("/");
     signOut(auth);
   };
@@ -52,7 +60,6 @@ export const Details = ({ setCards, sendData }) => {
   function handleClick() {
     sendData(card);
   }
-
 
   useEffect(() => {
     const getUser = async () => {
@@ -63,16 +70,14 @@ export const Details = ({ setCards, sendData }) => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         // console.log(doc.data());
-        
+
         setCard(doc.data());
       });
       // console.log(card);
     };
 
-    
     getUser();
   }, [uid]);
-
 
   return (
     // <>
@@ -134,14 +139,17 @@ export const Details = ({ setCards, sendData }) => {
           </CardContent>
           <CardActions>
             {/* <Button size="small">Message</Button> */}
-            {
-            (currentUser && card.uid !== currentUser.uid) && 
-            <Link to="/messages" className={classes.messagesLink} onClick={handleClick}>
-                    Message
-            </Link>
-            }
-            
-            {(currentUser && currentUser.uid === card.uid) && (
+            {currentUser && card.uid !== currentUser.uid && (
+              <Link
+                to="/messages"
+                className={classes.messagesLink}
+                onClick={handleClick}
+              >
+                Message
+              </Link>
+            )}
+
+            {currentUser && currentUser.uid === card.uid && (
               <Button
                 variant="outlined"
                 color="error"
@@ -149,7 +157,6 @@ export const Details = ({ setCards, sendData }) => {
               >
                 Delete Profile
               </Button>
-            
             )}
           </CardActions>
         </Card>

@@ -63,11 +63,11 @@ export const Login = () => {
    
     const queryEmail = query(usersRef, where('email', '==', email));
     const snapshot = await getDocs(queryEmail);
-    console.log(snapshot);
-    console.log(snapshot.size);
+    // console.log(snapshot);
+    // console.log(snapshot.size);
     const emailExists = snapshot.size >= 1;
     if (!emailExists) {
-      console.log(email);
+      // console.log(email);
       setEmailError('Email does not exist!');
       return;
     } else {
