@@ -108,90 +108,116 @@ export const EditProfile = ({
     // Validate data
     if (!firstName) {
       setFirstNameError("Please enter first name!");
+      return
     } else if (firstName.length < 2 || firstName.length > 50) {
       setFirstNameError("First name must be between 2 and 50 characters!");
+      return
     } else if (!/^[A-Za-z]+$/.test(firstName)) {
       setFirstNameError("Please enter a valid first name!");
+      return
     } else {
       setFirstNameError("");
     }
 
     if (!lastName) {
       setLastNameError("Please enter last name!");
+      return
     } else if (lastName.length < 2 || lastName.length > 50) {
       setFirstNameError("Last name must be between 2 and 50 characters!");
+      return
     } else if (!/^[A-Za-z]+$/.test(lastName)) {
       setFirstNameError("Please enter a valid last name!");
+      return
     } else {
       setFirstNameError("");
     }
 
     if (!city) {
       setCityError("Please enter city name!");
+      return
     } else if (city.length < 2 || city.length > 50) {
       setCityError("City name must be between 2 and 50 characters!");
+      return
     } else if (!/^[A-Za-z]+$/.test(city)) {
       setCityError("Please enter a valid city name!");
+      return
     } else {
       setCityError("");
     }
 
     if (!country) {
       setCountryError("Please enter country name!");
+      return
     } else if (country.length < 2 || country.length > 50) {
       setCountryError("Country name must be between 2 and 50 characters!");
+      return
     } else if (!/^[A-Za-z]+$/.test(country)) {
       setCountryError("Please enter a valid country name!");
+      return
     } else {
       setCountryError("");
     }
 
     if (!gender) {
       setGenderError("Please enter gender!");
+      return
     } else if (gender.length < 1 || gender.length > 10) {
       setGenderError("Gender must be between 1 and 10 characters");
+      return
     } else if (!/^[A-Za-z]+$/.test(gender)) {
       setGenderError("Please enter a valid gender!");
+      return
     } else if (!/^male$|^female$|^Male$|^Female$/.test(gender)) {
       setGenderError(
         "Please enter a valid gender - Male, Female, male, female!"
       );
+      return
     } else {
       setGenderError("");
     }
 
     if (!age) {
       setAgeError("Please enter a valid age!");
+      return
     } else if (!age || isNaN(parseInt(age))) {
       setAgeError("Age must be a number!");
+      return
     } else if (parseInt(age) < 1 || parseInt(age) > 35) {
       setAgeError("Age must be between 1 and 35");
+      return
     } else {
       setAgeError("");
     }
 
     if (!breed) {
       setBreedError("Please enter breed!");
+      return
     } else if (breed.length < 2 || breed.length > 50) {
       setBreedError("Breed name must be between 2 and 50 characters!");
+      return
     } else if (!/^[A-Za-z ]+$/.test(breed)) {
       setBreedError("Please enter a valid breed name!");
+      return
     } else {
       setBreedError("");
     }
 
     if (!file) {
       setImageError("Please enter an image!");
+      return
     } else if (!file.type.startsWith("image/")) {
       setImageError("Please upload an image!");
+      return
     } else {
       setImageError("");
     }
 
     if (!email) {
       setEmailError("Please enter an email!");
+      return
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setEmailError("Please enter a valid email!");
+      return
     } else {
       // validateEmail(email);
       // const usersRef = collection(db, "users");
@@ -211,10 +237,11 @@ export const EditProfile = ({
 
     if (!password) {
       setPasswordError("Please enter a password!");
-      return;
+      return
     } else if (password.length < 8 || password.length > 32) {
       setPasswordError("Password must be between 8 and 32 characters!");
-      return;
+      return
+      
     } else if (!/\d/.test(password) || !/[a-zA-Z]/.test(password)) {
       setPasswordError(
         "Password must contain at least one letter and one number!"
@@ -226,10 +253,12 @@ export const EditProfile = ({
 
     if (!additionalInfo) {
       setAdditionalInfoError("Please enter additional info!");
+      return
     } else if (additionalInfo.length < 2 || additionalInfo.length > 500) {
       setAdditionalInfoError(
         "Additional info must be between 2 and 500 characters!"
       );
+      return
     } else {
       setAdditionalInfoError("");
     }
