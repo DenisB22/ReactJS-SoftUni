@@ -19,7 +19,7 @@ import { AuthContext } from "../../context/AuthContext";
 export const DogItem = ({ cards }) => {
   
   const { currentUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
   
   // console.log(cards);
   
